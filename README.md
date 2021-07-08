@@ -16,7 +16,7 @@ git clone https://github.com/jerrenss/AWS-BuildOn-2021-Genesis.git
 
 ## Development
 
-The development workflow is orchestrated with Docker Compose, with launches both the client and server in a single command. Hot reload is enabled through the use of volume mounting. Client can be accessed at [http://localhost:3000](http://localhost:3000), and server can be accessed at [http://localhost:4000](http://localhost:4000).
+The development workflow is orchestrated with Docker Compose, which launches both the client and server in a single command. Hot reload is enabled through the use of volume mounting. Client can be accessed at [http://localhost:3000](http://localhost:3000), and server can be accessed at [http://localhost:4000](http://localhost:4000).
 
 To build the project and run the client and server containers concurrently:
 ```
