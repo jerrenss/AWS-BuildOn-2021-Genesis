@@ -1,6 +1,6 @@
 # AWS-BuildOn-2021-Genesis
 
-Greetings, this repository contains the source code of our hackathon solution. For the client side, `NextJS` is used to develop static UI assets, together with the renowed `Material-ui` styling library. For the server side,  `ExpressJS` is used to develop APIs which interact with our cloud services and data layer.
+Greetings, this repository contains the source code of our hackathon solution. For the client side, `NextJS` is used to develop static UI assets, together with the renowed `Material-UI` styling library. For the server side,  `ExpressJS` is used to develop APIs which interact with our cloud services and data layer.
 
 ---
 
