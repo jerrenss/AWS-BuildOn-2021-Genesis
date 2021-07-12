@@ -9,8 +9,8 @@ services:
     restart: always
     volumes:
       - ./client:/app
-      - /app/node_modules
-      - /app/.next
+      - client-mods:/app/node_modules
+      - client-next:/app/.next
     ports:
       - 3000:3000
   server:
@@ -21,6 +21,11 @@ services:
     restart: always
     volumes:
       - ./server:/app
-      - /app/node_modules
+      - server-mods:/app/node_modules
     ports:
-      - "4000:4000"
+      - 4000:4000
+
+volumes:
+  client-mods:
+  client-next:
+  server-mods:

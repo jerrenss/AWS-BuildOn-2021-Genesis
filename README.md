@@ -23,9 +23,9 @@ To build the project and run the client and server containers concurrently:
 docker-compose up
 ```
 
-To remove the containers and volumes after development work is completed:
+To remove the containers after development work is completed (you can add the *-v* flag to remove volumes if necessary):
 ```
-docker-compose down -v
+docker-compose down
 ```
 
 For commits, please use [semantic messages](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716) for clarity and easier tracking.
