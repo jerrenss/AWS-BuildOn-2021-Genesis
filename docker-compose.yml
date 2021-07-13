@@ -36,7 +36,7 @@ services:
       - ./server/migrations:/docker-entrypoint-initdb.d/
       - db-data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - 5433:5432
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -47,7 +47,7 @@ services:
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     ports:
-      - "5050:80"
+      - 5050:80
 
 volumes:
   client-mods:

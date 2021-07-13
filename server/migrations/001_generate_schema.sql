@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Doctors (
     doctor_id INTEGER PRIMARY KEY REFERENCES Users,
   	clinic_id INTEGER REFERENCES Clinics,
     qualification TEXT NOT NULL,
-    expertise TEXT UNIQUE NOT NULL,
+    expertise TEXT NOT NULL,
   	rating NUMERIC NOT NULL
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Consultations (
   	doctor_id INTEGER REFERENCES Doctors,
    	patient_id INTEGER REFERENCES Patients,
     recording_file TEXT,
-    notes_file TEXT UNIQUE NOT NULL,
+    notes_file TEXT,
   	timeslot TIMESTAMPTZ NOT NULL,
   	status SMALLINT NOT NULL
 );
