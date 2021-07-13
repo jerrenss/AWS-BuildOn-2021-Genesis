@@ -24,8 +24,34 @@ services:
       - server-mods:/app/node_modules
     ports:
       - 4000:4000
+  database:
+    image: postgres:12.7
+    container_name: database
+    restart: always
+    environment:
+      POSTGRES_USER: gensis
+      POSTGRES_PASSWORD: gensis
+      POSTGRES_DB: doctoristic
+    volumes:
+      - ./server/migrations:/docker-entrypoint-initdb.d/
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: gensis@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: gensis
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
 
 volumes:
   client-mods:
   client-next:
   server-mods:
+  db-data:
+  pgadmin-data:
