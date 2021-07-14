@@ -1,4 +1,4 @@
-INSERT INTO users (name, email, password_hash) VALUES 
+INSERT INTO users (user_name, email, password_hash) VALUES 
 ('Albert Loo', 'albertloo@gmail.com', 'password'),
 ('Beverly Koh', 'beverlykoh@gmail.com', 'password'),
 ('Charles Wong', 'charleswong@gmail.com', 'password'),
@@ -10,7 +10,7 @@ INSERT INTO users (name, email, password_hash) VALUES
 ('Ivan Zheng', 'ivanzheng@gmail.com', 'password'),
 ('Janet Chan', 'janetchan@gmail.com', 'password');
 
-INSERT INTO clinics (name) VALUES
+INSERT INTO clinics (clinic_name) VALUES
 ('Hospital A'),
 ('Hospital B'),
 ('Hospital C'),
