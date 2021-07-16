@@ -13,6 +13,8 @@ services:
       - client-next:/app/.next
     ports:
       - 3000:3000
+    depends_on: 
+      - server
   server:
     build:
         context: ./server
@@ -26,6 +28,8 @@ services:
       - server-mods:/app/node_modules
     ports:
       - 4000:4000
+    depends_on: 
+      - database
   database:
     image: postgres:12.7
     container_name: database
@@ -50,6 +54,8 @@ services:
       - pgadmin-data:/var/lib/pgadmin
     ports:
       - 5050:80
+    depends_on: 
+      - database
 
 volumes:
   client-mods:
