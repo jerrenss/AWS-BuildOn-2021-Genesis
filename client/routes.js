@@ -16,87 +16,70 @@
 
 */
 // @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Person from "@material-ui/icons/Person";
-import LibraryBooks from "@material-ui/icons/LibraryBooks";
-import BubbleChart from "@material-ui/icons/BubbleChart";
-import LocationOn from "@material-ui/icons/LocationOn";
-import Notifications from "@material-ui/icons/Notifications";
-import Unarchive from "@material-ui/icons/Unarchive";
-import Language from "@material-ui/icons/Language";
+import Person from '@material-ui/icons/Person';
+import LibraryBooks from '@material-ui/icons/LibraryBooks';
+import HomeIcon from '@material-ui/icons/Home';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SettingsIcon from '@material-ui/icons/Settings';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const dashboardRoutes = [
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    rtlName: "لوحة القيادة",
-    icon: Dashboard,
+    path: '/dashboard',
+    name: 'Home',
+    rtlName: 'لوحة القيادة',
+    icon: HomeIcon,
 
-    layout: "/admin",
+    layout: '/admin',
   },
   {
-    path: "/user-profile",
-    name: "User Profile",
-    rtlName: "ملف تعريفي للمستخدم",
+    path: '/user-profile',
+    name: 'Appointment',
+    rtlName: 'ملف تعريفي للمستخدم',
+    icon: AssignmentIcon,
+
+    layout: '/admin',
+  },
+  {
+    path: '/table-list',
+    name: 'Doctors',
+    rtlName: 'قائمة الجدول',
     icon: Person,
 
-    layout: "/admin",
+    layout: '/admin',
   },
   {
-    path: "/table-list",
-    name: "Table List",
-    rtlName: "قائمة الجدول",
-    icon: "content_paste",
-
-    layout: "/admin",
-  },
-  {
-    path: "/typography",
-    name: "Typography",
-    rtlName: "طباعة",
+    path: '/typography',
+    name: 'Lab Reports',
+    rtlName: 'طباعة',
     icon: LibraryBooks,
 
-    layout: "/admin",
+    layout: '/admin',
   },
   {
-    path: "/icons",
-    name: "Icons",
-    rtlName: "الرموز",
-    icon: BubbleChart,
+    path: '/icons',
+    name: 'Profile',
+    rtlName: 'الرموز',
+    icon: AccountCircleIcon,
 
-    layout: "/admin",
+    layout: '/admin',
   },
   {
-    path: "/maps",
-    name: "Maps",
-    rtlName: "خرائط",
-    icon: LocationOn,
+    path: '/maps',
+    name: 'Settings',
+    rtlName: 'خرائط',
+    icon: SettingsIcon,
 
-    layout: "/admin",
+    layout: '/admin',
   },
   {
-    path: "/notifications",
-    name: "Notifications",
-    rtlName: "إخطارات",
-    icon: Notifications,
+    path: '/notifications',
+    name: 'Log out',
+    rtlName: 'إخطارات',
+    icon: ExitToAppIcon,
 
-    layout: "/admin",
-  },
-  {
-    path: "/rtl-page",
-    name: "RTL Support",
-    rtlName: "پشتیبانی از راست به چپ",
-    icon: Language,
-
-    layout: "/rtl",
-  },
-  {
-    path: "/upgrade-to-pro",
-    name: "Upgrade To PRO",
-    rtlName: "التطور للاحترافية",
-    icon: Unarchive,
-
-    layout: "/admin",
+    layout: '/admin',
   },
 ];
 
