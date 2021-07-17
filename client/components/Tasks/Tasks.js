@@ -1,63 +1,57 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
+import React from 'react';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Checkbox from "@material-ui/core/Checkbox";
-import Tooltip from "@material-ui/core/Tooltip";
-import IconButton from "@material-ui/core/IconButton";
-import Table from "@material-ui/core/Table";
-import TableRow from "@material-ui/core/TableRow";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
+import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import Table from '@material-ui/core/Table';
+import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
 // @material-ui/icons
-import Edit from "@material-ui/icons/Edit";
-import Close from "@material-ui/icons/Close";
-import Check from "@material-ui/icons/Check";
+import Edit from '@material-ui/icons/Edit';
+import Close from '@material-ui/icons/Close';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 // core components
-import styles from "assets/jss/nextjs-material-dashboard/components/tasksStyle.js";
+import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
 
 export default function Tasks(props) {
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([...props.checkedIndexes]);
-  const handleToggle = (value) => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    setChecked(newChecked);
-  };
   const { tasksIndexes, tasks, rtlActive } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
+  console.log(tasks);
   return (
     <Table className={classes.table}>
+      <TableHead>
+        <TableRow>
+          <TableCell align="center">Doctor Name</TableCell>
+          <TableCell align="center">Scans</TableCell>
+          <TableCell align="center">Consultation Date</TableCell>
+          <TableCell align="center">Actions</TableCell>
+        </TableRow>
+      </TableHead>
       <TableBody>
-        {tasksIndexes.map((value) => (
+        {tasksIndexes.map(value => (
           <TableRow key={value} className={classes.tableRow}>
-            <TableCell className={tableCellClasses}>
-              <Checkbox
-                checked={checked.indexOf(value) !== -1}
-                tabIndex={-1}
-                onClick={() => handleToggle(value)}
-                checkedIcon={<Check className={classes.checkedIcon} />}
-                icon={<Check className={classes.uncheckedIcon} />}
-                classes={{
-                  checked: classes.checked,
-                  root: classes.root,
-                }}
-              />
+            <TableCell className={tableCellClasses} align="center">
+              {tasks[value].doctor}
             </TableCell>
-            <TableCell className={tableCellClasses}>{tasks[value]}</TableCell>
-            <TableCell className={classes.tableActions}>
+            <TableCell className={tableCellClasses} align="center">
+              {tasks[value].image === true ? 'true' : '-'}
+            </TableCell>
+            <TableCell className={tableCellClasses} align="center">
+              {tasks[value].date}
+            </TableCell>
+            <TableCell align="center">
               <Tooltip
                 id="tooltip-top"
-                title="Edit Task"
+                title="Edit Appointment"
                 placement="top"
                 classes={{ tooltip: classes.tooltip }}
               >
@@ -65,26 +59,9 @@ export default function Tasks(props) {
                   aria-label="Edit"
                   className={classes.tableActionButton}
                 >
-                  <Edit
+                  <MoreVertIcon
                     className={
-                      classes.tableActionButtonIcon + " " + classes.edit
-                    }
-                  />
-                </IconButton>
-              </Tooltip>
-              <Tooltip
-                id="tooltip-top-start"
-                title="Remove"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <IconButton
-                  aria-label="Close"
-                  className={classes.tableActionButton}
-                >
-                  <Close
-                    className={
-                      classes.tableActionButtonIcon + " " + classes.close
+                      classes.tableActionButtonIcon + ' ' + classes.edit
                     }
                   />
                 </IconButton>

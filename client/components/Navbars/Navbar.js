@@ -6,14 +6,6 @@ import { useRouter } from 'next/router';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Hidden from '@material-ui/core/Hidden';
-// @material-ui/icons
-import Menu from '@material-ui/icons/Menu';
-// core components
-import AdminNavbarLinks from './AdminNavbarLinks.js';
-import RTLNavbarLinks from './RTLNavbarLinks.js';
-import Button from 'components/CustomButtons/Button.js';
 
 import styles from 'assets/jss/nextjs-material-dashboard/components/headerStyle.js';
 
@@ -23,10 +15,6 @@ export default function Header(props) {
   // create styles for this component
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  function makeBrand() {
-    var name = 'Hello Mary!';
-    return name;
-  }
   const { color } = props;
   const appBarClasses = classNames({
     [' ' + classes[color]]: color,
@@ -34,7 +22,24 @@ export default function Header(props) {
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
-        <div className={classes.flex}>{makeBrand()}</div>
+        <div style={{ margin: '20px' }}>
+          <div style={{ fontWeight: '600', marginBottom: '25px' }}>
+            <span style={{ fontSize: '34px', color: 'black' }}>
+              Hello&nbsp;
+            </span>
+            <span style={{ fontSize: '34px', color: '#3781F5' }}>Mary</span>
+            <span style={{ fontSize: '34px', color: 'black' }}>!</span>
+          </div>
+          <div
+            style={{
+              fontSize: '26px',
+              fontWeight: '600',
+              color: 'black',
+            }}
+          >
+            How are you feeling today?
+          </div>
+        </div>
       </Toolbar>
     </AppBar>
   );
