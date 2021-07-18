@@ -25,7 +25,6 @@ export default function Tasks(props) {
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
-  console.log(tasks);
   return (
     <Table className={classes.table}>
       <TableHead>
