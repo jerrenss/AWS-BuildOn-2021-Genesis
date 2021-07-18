@@ -24,7 +24,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
-const dashboardRoutes = [
+const patientRoutes = [
   {
     path: '/dashboard',
     name: 'Home',
@@ -46,14 +46,6 @@ const dashboardRoutes = [
     name: 'Doctors',
     rtlName: 'قائمة الجدول',
     icon: Person,
-
-    layout: '/admin',
-  },
-  {
-    path: '/typography',
-    name: 'Lab Reports',
-    rtlName: 'طباعة',
-    icon: LibraryBooks,
 
     layout: '/admin',
   },
@@ -83,4 +75,50 @@ const dashboardRoutes = [
   },
 ];
 
-export default dashboardRoutes;
+const doctorRoutes = [
+  {
+    path: '/dashboard',
+    name: 'Home',
+    rtlName: 'لوحة القيادة',
+    icon: HomeIcon,
+
+    layout: '/doctor',
+  },
+  {
+    path: '',
+    name: 'Lab Reports',
+    rtlName: 'طباعة',
+    icon: LibraryBooks,
+
+    layout: '#',
+  },
+  {
+    path: '',
+    name: 'Profile',
+    rtlName: 'الرموز',
+    icon: AccountCircleIcon,
+
+    layout: '#',
+  },
+  {
+    path: '',
+    name: 'Settings',
+    rtlName: 'خرائط',
+    icon: SettingsIcon,
+
+    layout: '#',
+  },
+  {
+    path: '',
+    name: 'Log out',
+    rtlName: 'إخطارات',
+    icon: ExitToAppIcon,
+
+    layout: '#',
+  },
+];
+
+module.exports = {
+  patientRoutes,
+  doctorRoutes
+};

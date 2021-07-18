@@ -13,8 +13,14 @@ var server = [
   'Sign contract for "What are conference organizers afraid of?"',
 ];
 
+const DOCTOR_ONGOING = [{ patient: 'Mary Lee', image: false, date: '20/07/2021' }, { patient: 'Joseph Khoo', image: false, date: '18/07/2021' }, { patient: 'Chen Chen', image: true, date: '15/07/2021' }];
+const DOCTOR_PENDING = [{ patient: 'Reuben Loo', image: false, date: '19/07/2021' }];
+const DOCTOR_COMPLETED = [{ patient: 'David Chan', image: true, date: '10/07/2021' }, { patient: 'Claire Chan', image: true, date: '10/07/2021' }];
+
 module.exports = {
-  // these 3 are used to create the tasks lists in TasksCard - Dashboard view
+  DOCTOR_ONGOING,
+  DOCTOR_PENDING,
+  DOCTOR_COMPLETED,
   bugs,
   website,
   server,

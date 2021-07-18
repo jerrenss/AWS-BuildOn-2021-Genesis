@@ -10,12 +10,12 @@ import Navbar from 'components/Navbars/Navbar.js';
 import Footer from 'components/Footer/Footer.js';
 import Sidebar from 'components/Sidebar/Sidebar.js';
 
-import routes from 'routes.js';
+import { patientRoutes } from 'routes.js';
 
 import styles from 'assets/jss/nextjs-material-dashboard/layouts/adminStyle.js';
 
 import bgImage from 'assets/img/sidebar-2.jpg';
-import logo from 'assets/img/reactlogo.png';
+import logo from 'assets/img/medical-doctor.png';
 
 let ps;
 
@@ -77,7 +77,7 @@ export default function Admin({ children, ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes}
+        routes={patientRoutes}
         logoText={'Doctoristic'}
         logo={logo}
         image={image}
@@ -88,7 +88,7 @@ export default function Admin({ children, ...rest }) {
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-          routes={routes}
+          routes={patientRoutes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
