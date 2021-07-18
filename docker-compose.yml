@@ -21,8 +21,8 @@ services:
         dockerfile: Dockerfile
     container_name: server
     restart: always
-    environment:
-      DB_CONNECTION_STRING: postgres://gensis:gensis@host.docker.internal:5433/doctoristic
+    env_file: 
+      - ./server/.env
     volumes:
       - ./server:/app
       - server-mods:/app/node_modules
