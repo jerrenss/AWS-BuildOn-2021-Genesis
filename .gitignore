@@ -1,3 +1,5 @@
+.DS_Store
+
 /client/node_modules
 /client/.next
 /client/build
