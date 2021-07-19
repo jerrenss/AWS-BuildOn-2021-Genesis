@@ -6,7 +6,7 @@ const backBtn = document.querySelector(".header__back");
 myVideo.muted = true;
 
 backBtn.addEventListener("click", () => {
-  // Update URL to return to home dashboard
+  // TODO: Update URL to return to home dashboard
   window.location.href = "http://stackoverflow.com";
 });
 
