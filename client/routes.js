@@ -34,7 +34,7 @@ const patientRoutes = [
     layout: '/admin',
   },
   {
-    path: '/user-profile',
+    path: '/table-list',
     name: 'Appointment',
     rtlName: 'ملف تعريفي للمستخدم',
     icon: AssignmentIcon,
@@ -42,7 +42,7 @@ const patientRoutes = [
     layout: '/admin',
   },
   {
-    path: '/table-list',
+    path: '/doctor-list',
     name: 'Doctors',
     rtlName: 'قائمة الجدول',
     icon: Person,
