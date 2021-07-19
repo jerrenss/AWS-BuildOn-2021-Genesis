@@ -25,6 +25,7 @@ export default function RegularButton(props) {
     justIcon,
     className,
     muiClasses,
+    fontSize,
     ...rest
   } = props;
   const btnClasses = classNames({
@@ -39,10 +40,9 @@ export default function RegularButton(props) {
     [classes.justIcon]: justIcon,
     [className]: className,
   });
-  console.log(children);
   return (
     <Button {...rest} classes={{ ...muiClasses, root: btnClasses }}>
-      <span style={{ fontSize: '18px' }}>{children}</span>
+      <span style={{ fontSize: fontSize }}>{children}</span>
     </Button>
   );
 }

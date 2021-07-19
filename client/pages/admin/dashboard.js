@@ -32,11 +32,33 @@ function Dashboard() {
             tabs={[
               {
                 tabName: 'Ongoing',
-                tabContent: <Tasks tasksIndexes={[0]} tasks={bugs} />,
+                tabContent: (
+                  <Tasks
+                    tasksIndexes={[0]}
+                    tasks={bugs}
+                    headers={[
+                      'Doctor Name',
+                      'Scans',
+                      'Consultation Date',
+                      'Actions',
+                    ]}
+                  />
+                ),
               },
               {
                 tabName: 'Completed',
-                tabContent: <Tasks tasksIndexes={[0, 1]} tasks={website} />,
+                tabContent: (
+                  <Tasks
+                    tasksIndexes={[0, 1]}
+                    tasks={website}
+                    headers={[
+                      'Doctor Name',
+                      'Scans',
+                      'Consultation Date',
+                      'Actions',
+                    ]}
+                  />
+                ),
               },
             ]}
           />
