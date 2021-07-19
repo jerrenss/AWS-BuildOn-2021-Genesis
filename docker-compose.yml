@@ -56,6 +56,13 @@ services:
       - 5050:80
     depends_on: 
       - database
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - "client"
 
 volumes:
   client-mods:
