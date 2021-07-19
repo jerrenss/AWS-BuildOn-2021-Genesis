@@ -6,10 +6,8 @@ const backBtn = document.querySelector(".header__back");
 myVideo.muted = true;
 
 backBtn.addEventListener("click", () => {
-  document.querySelector(".main__left").style.display = "flex";
-  document.querySelector(".main__left").style.flex = "1";
-  document.querySelector(".main__right").style.display = "none";
-  document.querySelector(".header__back").style.display = "none";
+  // Update URL to return to home dashboard
+  window.location.href = "http://stackoverflow.com";
 });
 
 showChat.addEventListener("click", () => {

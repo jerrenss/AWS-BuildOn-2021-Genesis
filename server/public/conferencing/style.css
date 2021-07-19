@@ -195,7 +195,6 @@ video {
 }
 
 .header__back {
-  display: none;
   position: absolute;
   font-size: 1.3rem;
   top: 17px;
