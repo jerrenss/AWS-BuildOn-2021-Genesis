@@ -120,5 +120,5 @@ const doctorRoutes = [
 
 module.exports = {
   patientRoutes,
-  doctorRoutes
+  doctorRoutes,
 };

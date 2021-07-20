@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
@@ -13,11 +12,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import Rating from '@material-ui/lab/Rating';
 // @material-ui/icons
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 // core components
 import Button from '../../components/CustomButtons/Button';
+import Modal from '../../components/Modal/Modal';
+import BookingFrom from '../../components/BookingForm/BookingForm';
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
 
 const rating = value => {
@@ -35,8 +34,8 @@ const rating = value => {
   }
 };
 
-const DoctorList = (doctorList, rtlActive) => {
-  console.log(doctorList);
+const DoctorList = props => {
+  const { doctorList, rtlActive, onButtonClick } = props;
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const tableCellClasses = classnames(classes.tableCell, {
@@ -57,7 +56,12 @@ const DoctorList = (doctorList, rtlActive) => {
               {rating(doctor.rating)}
             </TableCell>
             <TableCell align="center">
-              <Button color="info" fontSize="12px">
+              <Button
+                color="info"
+                fontSize="12px"
+                onClick={onButtonClick}
+                value={doctor.name}
+              >
                 Book Now
               </Button>
             </TableCell>
@@ -69,13 +73,31 @@ const DoctorList = (doctorList, rtlActive) => {
 };
 
 export default function Tasks(props) {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedDoctor, setSelectedDoctor] = useState('');
+  console.log(selectedDoctor);
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const { tasksIndexes, tasks, rtlActive, headers, isDoctorList } = props;
-  console.log(headers);
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
+
+  const handleButtonClick = event => {
+    setSelectedDoctor(event.target.value);
+    setShowModal(true);
+  };
+
+  const buttons = (
+    <>
+      <Button color="warning" onClick={() => setShowModal(false)}>
+        Back
+      </Button>
+      <Button color="info">Submit</Button>
+    </>
+  );
+
+  const description = <>Virtual Consultation Appointment Form</>;
 
   return (
     <Table className={classes.table}>
@@ -120,7 +142,23 @@ export default function Tasks(props) {
               </TableCell>
             </TableRow>
           ))}
-        {isDoctorList && DoctorList(tasks, rtlActive)}
+        {isDoctorList && (
+          <DoctorList
+            doctorList={tasks}
+            rtlActive={rtlActive}
+            onButtonClick={handleButtonClick}
+          />
+        )}
+        {showModal && (
+          <Modal
+            content={<BookingFrom selectedDoctor={selectedDoctor} />}
+            color="#3781F5"
+            headerColor="white"
+            style={{ height: '600px' }}
+            actions={buttons}
+            description={description}
+          />
+        )}
       </TableBody>
     </Table>
   );
