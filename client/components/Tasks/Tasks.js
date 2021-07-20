@@ -16,6 +16,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 // core components
 import Button from '../../components/CustomButtons/Button';
 import Modal from '../../components/Modal/Modal';
+import DoctorInfo from '../../components/Modal/DoctorInfo';
 import BookingFrom from '../../components/BookingForm/BookingForm';
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
 
@@ -35,7 +36,7 @@ const rating = value => {
 };
 
 const DoctorList = props => {
-  const { doctorList, rtlActive, onButtonClick } = props;
+  const { doctorList, rtlActive, onBookingButtonClick, onDoctorButtonClick } = props;
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const tableCellClasses = classnames(classes.tableCell, {
@@ -58,8 +59,16 @@ const DoctorList = props => {
             <TableCell align="center">
               <Button
                 color="info"
-                fontSize="12px"
-                onClick={onButtonClick}
+                onClick={onDoctorButtonClick}
+                style={{ width: "130px", marginLeft: "16px" }}
+                value={doctor.name}
+              >
+                Doctor Info
+              </Button>
+              <Button
+                color="info"
+                style={{ width: "130px", marginLeft: "16px" }}
+                onClick={onBookingButtonClick}
                 value={doctor.name}
               >
                 Book Now
@@ -73,7 +82,8 @@ const DoctorList = props => {
 };
 
 export default function Tasks(props) {
-  const [showModal, setShowModal] = useState(false);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [showDoctorModal, setShowDoctorModal] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState('');
   console.log(selectedDoctor);
   const useStyles = makeStyles(styles);
@@ -83,21 +93,36 @@ export default function Tasks(props) {
     [classes.tableCellRTL]: rtlActive,
   });
 
-  const handleButtonClick = event => {
+  const handleBookingButtonClick = event => {
     setSelectedDoctor(event.target.value);
-    setShowModal(true);
+    setShowBookingModal(true);
   };
 
-  const buttons = (
+  const handleDoctorButtonClick = event => {
+    setSelectedDoctor(event.target.value);
+    setShowDoctorModal(true);
+  };
+
+  const doctorModalButton = (
     <>
-      <Button color="warning" onClick={() => setShowModal(false)}>
+      <Button color="warning" onClick={() => setShowDoctorModal(false)}>
+        Back
+      </Button>
+    </>
+  );
+
+  const bookingModalButtons = (
+    <>
+      <Button color="warning" onClick={() => setShowBookingModal(false)}>
         Back
       </Button>
       <Button color="info">Submit</Button>
     </>
   );
 
-  const description = <>Virtual Consultation Appointment Form</>;
+  const doctorModaldescription = <>About Dr Bukayo Saka</>;
+
+  const bookingModaldescription = <>Virtual Consultation Appointment Form</>;
 
   return (
     <Table className={classes.table}>
@@ -146,17 +171,28 @@ export default function Tasks(props) {
           <DoctorList
             doctorList={tasks}
             rtlActive={rtlActive}
-            onButtonClick={handleButtonClick}
+            onBookingButtonClick={handleBookingButtonClick}
+            onDoctorButtonClick={handleDoctorButtonClick}
           />
         )}
-        {showModal && (
+        {showDoctorModal && (
+          <Modal
+            content={<DoctorInfo selectedDoctor={selectedDoctor} />}
+            color="#3781F5"
+            headerColor="white"
+            style={{ height: '600px' }}
+            actions={doctorModalButton}
+            description={doctorModaldescription}
+          />
+        )}
+        {showBookingModal && (
           <Modal
             content={<BookingFrom selectedDoctor={selectedDoctor} />}
             color="#3781F5"
             headerColor="white"
             style={{ height: '600px' }}
-            actions={buttons}
-            description={description}
+            actions={bookingModalButtons}
+            description={bookingModaldescription}
           />
         )}
       </TableBody>
