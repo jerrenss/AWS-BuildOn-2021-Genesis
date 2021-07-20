@@ -7,7 +7,7 @@ myVideo.muted = true;
 
 backBtn.addEventListener("click", () => {
   // TODO: Update URL to return to home dashboard
-  window.location.href = "http://stackoverflow.com";
+  window.location.href = "/";
 });
 
 showChat.addEventListener("click", () => {
@@ -134,7 +134,7 @@ inviteButton.addEventListener("click", (e) => {
 socket.on("createMessage", (message, userName) => {
   messages.innerHTML =
     messages.innerHTML +
-    `<div class="message">
+    `<div class=${userName === user ? "message" : "message__others"}>
         <b><i class="far fa-user-circle"></i> <span> ${userName === user ? "me" : userName
     }</span> </b>
         <span>${message}</span>

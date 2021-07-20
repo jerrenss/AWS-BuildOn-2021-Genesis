@@ -93,7 +93,7 @@ video {
 .main__documents {
   display: flex;
   flex-direction: column;
-  flex: 0.3;
+  flex: 0.25;
   background-color: #242f41;
   border:0.5px solid black;
 }
@@ -124,7 +124,7 @@ video {
 .main__conversation {
   display: flex;
   flex-direction: column;
-  flex: 0.2;
+  flex: 0.25;
   background-color: #242f41;
   border:0.5px solid black;
 }
@@ -163,12 +163,15 @@ video {
 .message {
   display: flex;
   flex-direction: column;
+  width: 60%;
+  align-self: flex-end;
 }
 
 .message > b {
   color: #eeeeee;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   text-transform: capitalize;
 }
 
@@ -178,6 +181,32 @@ video {
 }
 
 .message > span {
+  background-color: #eeeeee;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.message__others {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  align-self: flex-start;
+}
+
+.message__others > b {
+  color: #eeeeee;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.message__others > b > i {
+  margin-right: 0.7rem;
+  font-size: 1.5rem;
+}
+
+.message__others > span {
   background-color: #eeeeee;
   margin: 1rem 0;
   padding: 1rem;
