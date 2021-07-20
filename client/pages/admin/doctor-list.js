@@ -11,28 +11,7 @@ import Tasks from 'components/Tasks/Tasks.js';
 import CustomTabs from 'components/CustomTabs/CustomTabs.js';
 
 import { bugs, doctors } from 'variables/general.js';
-
-const styles = {
-  cardCategoryWhite: {
-    color: 'rgba(255,255,255,.62)',
-    margin: '0',
-    fontSize: '14px',
-    marginTop: '0',
-    marginBottom: '0',
-  },
-  cardTitleWhite: {
-    color: '#FFFFFF',
-    marginTop: '0px',
-    minHeight: 'auto',
-    fontWeight: '300',
-    fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
-    marginBottom: '3px',
-    textDecoration: 'none',
-  },
-};
-
-function UserProfile() {
-  const useStyles = makeStyles(styles);
+function DoctorList() {
   const ratingOptions = [
     {
       value: '1',
@@ -101,6 +80,6 @@ function UserProfile() {
   );
 }
 
-UserProfile.layout = Admin;
+DoctorList.layout = Admin;
 
-export default UserProfile;
+export default DoctorList;

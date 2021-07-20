@@ -9,7 +9,10 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="theme-color" content="#000000" />
-          <link rel="shortcut icon" href={require('assets/img/medical-doctor.png')} />
+          <link
+            rel="shortcut icon"
+            href={require('assets/img/medical-doctor.png')}
+          />
           <link
             rel="apple-touch-icon"
             sizes="76x76"
@@ -33,11 +36,16 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          />
         </Head>
         <body>
-          <div id="page-transition"></div>
           <Main />
           <NextScript />
+          <div id="modal-root"></div>
+          <div id="page-transition"></div>
         </body>
       </Html>
     );

@@ -14,7 +14,6 @@ import { createMuiTheme } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import lightBlue from '@material-ui/core/colors/lightBlue';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Rating from '@material-ui/lab/Rating';
@@ -36,7 +35,7 @@ export default function CustomTabs(props) {
   const [value, setValue] = useState(0);
   const [rating, setRating] = useState(null);
   const [date, setDate] = useState(null);
-  const handleChange = (event, value) => {
+  const handleChange = value => {
     setValue(value);
   };
   const useStyles = makeStyles(styles);
@@ -61,7 +60,6 @@ export default function CustomTabs(props) {
     rtlActive,
     isTabs,
     isDoctorList,
-    ratingOptions,
   } = props;
   const cardTitle = classNames({
     [classes.cardTitle]: true,
@@ -155,6 +153,7 @@ export default function CustomTabs(props) {
                     disablePast
                     className={classesForDropdown.datepicker}
                     emptyLabel="Earliest Date"
+                    clearable
                   />
                 </ThemeProvider>
               </MuiPickersUtilsProvider>
