@@ -17,10 +17,5 @@ exports.uploadFile = (fileName, key, fileType) => {
         ContentType: fileType
     };
 
-    s3.upload(params, function (err, data) {
-        if (err) {
-            throw err;
-        }
-        console.log(`File uploaded successfully. ${data.Location}`);
-    });
+    return s3.upload(params).promise()
 };
