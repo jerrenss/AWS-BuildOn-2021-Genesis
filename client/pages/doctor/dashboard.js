@@ -10,7 +10,6 @@ import GridItem from 'components/Grid/GridItem.js';
 import GridContainer from 'components/Grid/GridContainer.js';
 import DoctorTasks from 'components/Tasks/DoctorTasks.js';
 import CustomTabs from 'components/CustomTabs/CustomTabs.js';
-import Button from '../../components/CustomButtons/Button';
 
 import { DOCTOR_ONGOING, DOCTOR_PENDING, DOCTOR_COMPLETED } from 'variables/general.js';
 

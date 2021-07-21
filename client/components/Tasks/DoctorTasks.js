@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import axios from 'axios';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
@@ -12,20 +12,59 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 // @material-ui/icons
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 // core components
+import Button from '../../components/CustomButtons/Button';
+import Modal from '../../components/Modal/Modal';
+import ImageUploader from '../../components/ImageUploader/ImageUploader';
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
 
 export default function DoctorTasks(props) {
+  const [uploadScanModal, setUploadScanModal] = useState(false);
+  const [scan, setScan] = useState(null);
+  console.log(scan);
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const { tasks, rtlActive } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
+
+  const UPLOAD_SCAN_ENDPOINT = '/api/doctors/upload-scan';
+
+  const uploadImage = () => {
+    axios({
+      method: 'post', 
+      url: UPLOAD_SCAN_ENDPOINT,
+      data: { patientId: 1 }
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
+
+  const UploadScanButtom = () => {
+    return <Button color="info" onClick={() => setUploadScanModal(true)}>Upload Scan</Button>
+  }
+
+  const handleImage = (image) => {
+    setScan(image);
+  }
+ 
+  const modalActions =  (
+      <>
+        <Button color="warning" onClick={() => setUploadScanModal(false)}>Cancel</Button>
+        <Button color="info" onClick={uploadImage}>Done</Button> 
+      </>
+  )
+
+  const content = (
+    <>
+      <ImageUploader onUploadHandle={handleImage}/>
+    </>
+  )
+
   return (
+    <>
     <Table className={classes.table}>
       <TableHead>
         <TableRow>
@@ -42,7 +81,7 @@ export default function DoctorTasks(props) {
               {tasks[value].patient}
             </TableCell>
             <TableCell className={tableCellClasses} align="center">
-              {tasks[value].image === true ? 'Uploaded' : '-'}
+              {tasks[value].image === true ? 'Uploaded' : <UploadScanButtom />}
             </TableCell>
             <TableCell className={tableCellClasses} align="center">
               {tasks[value].date}
@@ -69,7 +108,9 @@ export default function DoctorTasks(props) {
           </TableRow>
         ))}
       </TableBody>
+      {uploadScanModal && <Modal content={content} actions={modalActions}/>}
     </Table>
+    </>
   );
 }
 
