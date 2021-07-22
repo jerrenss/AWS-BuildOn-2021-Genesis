@@ -33,13 +33,20 @@ export default function DoctorTasks(props) {
   const UPLOAD_SCAN_ENDPOINT = '/api/doctors/upload-scan';
 
   const uploadImage = () => {
+    const formData = new FormData()
+    formData.append('patientId', 1)
+    formData.append('scanFile', scan[0])
     axios({
-      method: 'post', 
+      method: 'post',
       url: UPLOAD_SCAN_ENDPOINT,
-      data: { patientId: 1 }
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
     })
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
+      .then(res => {
+        console.log(res.data)
+        setUploadScanModal(false)
+      })
+      .catch(err => console.log(err));
   }
 
   const UploadScanButtom = () => {
@@ -49,67 +56,67 @@ export default function DoctorTasks(props) {
   const handleImage = (image) => {
     setScan(image);
   }
- 
-  const modalActions =  (
-      <>
-        <Button color="warning" onClick={() => setUploadScanModal(false)}>Cancel</Button>
-        <Button color="info" onClick={uploadImage}>Done</Button> 
-      </>
+
+  const modalActions = (
+    <>
+      <Button color="warning" onClick={() => setUploadScanModal(false)}>Cancel</Button>
+      <Button color="info" onClick={uploadImage}>Done</Button>
+    </>
   )
 
   const content = (
     <>
-      <ImageUploader onUploadHandle={handleImage}/>
+      <ImageUploader onUploadHandle={handleImage} />
     </>
   )
 
   return (
     <>
-    <Table className={classes.table}>
-      <TableHead>
-        <TableRow>
-          <TableCell align="center">Patient Name</TableCell>
-          <TableCell align="center">Scans</TableCell>
-          <TableCell align="center">Consultation Date</TableCell>
-          <TableCell align="center">Actions</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {tasks.map((index, value) => (
-          <TableRow key={index} className={classes.tableRow}>
-            <TableCell className={tableCellClasses} align="center">
-              {tasks[value].patient}
-            </TableCell>
-            <TableCell className={tableCellClasses} align="center">
-              {tasks[value].image === true ? 'Uploaded' : <UploadScanButtom />}
-            </TableCell>
-            <TableCell className={tableCellClasses} align="center">
-              {tasks[value].date}
-            </TableCell>
-            <TableCell align="center">
-              <Tooltip
-                id="tooltip-top"
-                title="Edit Appointment"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <IconButton
-                  aria-label="Edit"
-                  className={classes.tableActionButton}
-                >
-                  <MoreVertIcon
-                    className={
-                      classes.tableActionButtonIcon + ' ' + classes.edit
-                    }
-                  />
-                </IconButton>
-              </Tooltip>
-            </TableCell>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell align="center">Patient Name</TableCell>
+            <TableCell align="center">Scans</TableCell>
+            <TableCell align="center">Consultation Date</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-      {uploadScanModal && <Modal content={content} actions={modalActions}/>}
-    </Table>
+        </TableHead>
+        <TableBody>
+          {tasks.map((index, value) => (
+            <TableRow key={index} className={classes.tableRow}>
+              <TableCell className={tableCellClasses} align="center">
+                {tasks[value].patient}
+              </TableCell>
+              <TableCell className={tableCellClasses} align="center">
+                {tasks[value].image === true ? 'Uploaded' : <UploadScanButtom />}
+              </TableCell>
+              <TableCell className={tableCellClasses} align="center">
+                {tasks[value].date}
+              </TableCell>
+              <TableCell align="center">
+                <Tooltip
+                  id="tooltip-top"
+                  title="Edit Appointment"
+                  placement="top"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  <IconButton
+                    aria-label="Edit"
+                    className={classes.tableActionButton}
+                  >
+                    <MoreVertIcon
+                      className={
+                        classes.tableActionButtonIcon + ' ' + classes.edit
+                      }
+                    />
+                  </IconButton>
+                </Tooltip>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        {uploadScanModal && <Modal content={content} actions={modalActions} />}
+      </Table>
     </>
   );
 }
