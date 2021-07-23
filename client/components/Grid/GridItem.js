@@ -20,7 +20,7 @@ export default function GridItem(props) {
       item
       {...rest}
       className={classes.grid}
-      style={{ marginBottom: '40px' }}
+      style={{ marginBottom: '30px' }}
     >
       {children}
     </Grid>
