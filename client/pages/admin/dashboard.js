@@ -19,7 +19,7 @@ function Dashboard() {
     <div style={{ marginTop: '50px' }}>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <Button color="info">Book a virtual consultation now</Button>
+          <Button color="info"><span style={{fontSize: '14px'}}>Book a virtual consultation now</span></Button>
         </GridItem>
       </GridContainer>
       <GridContainer>
@@ -40,6 +40,7 @@ function Dashboard() {
                       'Doctor Name',
                       'Scans',
                       'Consultation Date',
+                      'Status',
                       'Actions',
                     ]}
                   />
@@ -55,6 +56,7 @@ function Dashboard() {
                       'Doctor Name',
                       'Scans',
                       'Consultation Date',
+                      'Status',
                       'Actions',
                     ]}
                   />

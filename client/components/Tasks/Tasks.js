@@ -3,21 +3,18 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
-import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import Rating from '@material-ui/lab/Rating';
-// @material-ui/icons
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 // core components
 import Button from '../../components/CustomButtons/Button';
 import Modal from '../../components/Modal/Modal';
 import DoctorInfo from '../../components/Modal/DoctorInfo';
 import BookingFrom from '../../components/BookingForm/BookingForm';
+import AppointmentInfo from '../../components/AppointmentInfo/AppointmentInfo'
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
 
 const rating = value => {
@@ -84,6 +81,8 @@ const DoctorList = props => {
 export default function Tasks(props) {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showDoctorModal, setShowDoctorModal] = useState(false);
+  const [showMoreInfoModal, setShowMoreInfoModal] = useState(false);
+  const [moreInfoModalDoctor, setMoreInfoModalDoctor] = useState('');
   const [selectedDoctor, setSelectedDoctor] = useState('');
   console.log(selectedDoctor);
   const useStyles = makeStyles(styles);
@@ -103,6 +102,16 @@ export default function Tasks(props) {
     setShowDoctorModal(true);
   };
 
+  const handleMoreInfoClick = event => {
+    setMoreInfoModalDoctor(event);
+    setShowMoreInfoModal(true);
+  }
+
+  const handleOnCloseClick = () => {
+    console.log("click");
+    setShowMoreInfoModal(false);
+  }
+
   const doctorModalButton = (
     <>
       <Button color="warning" onClick={() => setShowDoctorModal(false)}>
@@ -120,9 +129,21 @@ export default function Tasks(props) {
     </>
   );
 
+  const ActionsButtons = (props) => {
+    const { doctor } = props;
+    return (
+      <div>
+        <Button color='success' onClick={() => handleMoreInfoClick(doctor)}>More Info</Button>
+        <Button color='warning'>Edit Appointment</Button>
+      </div>
+    );
+  }
+
   const doctorModaldescription = <>About Dr Bukayo Saka</>;
 
   const bookingModaldescription = <>Virtual Consultation Appointment Form</>;
+
+  const appointmentInfoDescription = <>More Information About Appointment</>
 
   return (
     <Table className={classes.table}>
@@ -146,24 +167,11 @@ export default function Tasks(props) {
               <TableCell className={tableCellClasses} align="center">
                 {tasks[value].date}
               </TableCell>
-              <TableCell align="center">
-                <Tooltip
-                  id="tooltip-top"
-                  title="Edit Appointment"
-                  placement="top"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <IconButton
-                    aria-label="Edit"
-                    className={classes.tableActionButton}
-                  >
-                    <MoreVertIcon
-                      className={
-                        classes.tableActionButtonIcon + ' ' + classes.edit
-                      }
-                    />
-                  </IconButton>
-                </Tooltip>
+              <TableCell className={tableCellClasses} align="center">
+                Test
+              </TableCell>
+              <TableCell align="center" padding="checkbox">
+                <ActionsButtons doctor={tasks[value].doctor}/>
               </TableCell>
             </TableRow>
           ))}
@@ -193,6 +201,16 @@ export default function Tasks(props) {
             style={{ height: '600px' }}
             actions={bookingModalButtons}
             description={bookingModaldescription}
+          />
+        )}
+        {showMoreInfoModal && (
+          <Modal color="#3781F5"
+            color="#3781F5"
+            headerColor="white"
+            style={{ height: '600px' }}
+            handleOnCloseClick={handleOnCloseClick}
+            content={<AppointmentInfo doctorName={moreInfoModalDoctor}/>}
+            description={appointmentInfoDescription}
           />
         )}
       </TableBody>

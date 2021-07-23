@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 const Modal = props => {
   const [isBrowser, setIsBrowser] = useState(false);
+  const { handleOnCloseClick } = props;
 
   useEffect(() => {
     setIsBrowser(true);
@@ -21,6 +22,7 @@ const Modal = props => {
         }}
       >
         <div className="ui standard full screen modal visible active">
+          <i class="close icon" onClick={handleOnCloseClick}></i>
           <div
             className="ui center aligned header"
             style={{
