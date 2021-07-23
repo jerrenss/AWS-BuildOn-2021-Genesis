@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import axios from 'axios';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
@@ -12,64 +12,112 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 // @material-ui/icons
-import Edit from '@material-ui/icons/Edit';
-import Close from '@material-ui/icons/Close';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 // core components
+import Button from '../../components/CustomButtons/Button';
+import Modal from '../../components/Modal/Modal';
+import ImageUploader from '../../components/ImageUploader/ImageUploader';
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
 
 export default function DoctorTasks(props) {
+  const [uploadScanModal, setUploadScanModal] = useState(false);
+  const [scan, setScan] = useState(null);
+  console.log(scan);
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const { tasks, rtlActive } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
+
+  const UPLOAD_SCAN_ENDPOINT = '/api/doctors/upload-scan';
+
+  const uploadImage = () => {
+    const formData = new FormData()
+    formData.append('patientId', 1)
+    formData.append('scanFile', scan[0])
+    axios({
+      method: 'post',
+      url: UPLOAD_SCAN_ENDPOINT,
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then(res => {
+        console.log(res.data)
+        setUploadScanModal(false)
+      })
+      .catch(err => console.log(err));
+  }
+
+  const UploadScanButtom = () => {
+    return <Button color="info" onClick={() => setUploadScanModal(true)}>Upload Scan</Button>
+  }
+
+  const handleImage = (image) => {
+    setScan(image);
+  }
+
+  const modalActions = (
+    <>
+      <Button color="warning" onClick={() => setUploadScanModal(false)}>Cancel</Button>
+      <Button color="info" onClick={uploadImage}>Done</Button>
+    </>
+  )
+
+  const content = (
+    <>
+      <ImageUploader onUploadHandle={handleImage} />
+    </>
+  )
+
   return (
-    <Table className={classes.table}>
-      <TableHead>
-        <TableRow>
-          <TableCell align="center">Patient Name</TableCell>
-          <TableCell align="center">Scans</TableCell>
-          <TableCell align="center">Consultation Date</TableCell>
-          <TableCell align="center">Actions</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {tasks.map((index, value) => (
-          <TableRow key={index} className={classes.tableRow}>
-            <TableCell className={tableCellClasses} align="center">
-              {tasks[value].patient}
-            </TableCell>
-            <TableCell className={tableCellClasses} align="center">
-              {tasks[value].image === true ? 'Uploaded' : '-'}
-            </TableCell>
-            <TableCell className={tableCellClasses} align="center">
-              {tasks[value].date}
-            </TableCell>
-            <TableCell align="center">
-              <Tooltip
-                id="tooltip-top"
-                title="Edit Appointment"
-                placement="top"
-                classes={{ tooltip: classes.tooltip }}
-              >
-                <IconButton
-                  aria-label="Edit"
-                  className={classes.tableActionButton}
-                >
-                  <MoreVertIcon
-                    className={
-                      classes.tableActionButtonIcon + ' ' + classes.edit
-                    }
-                  />
-                </IconButton>
-              </Tooltip>
-            </TableCell>
+    <>
+      <Table className={classes.table}>
+        <TableHead>
+          <TableRow>
+            <TableCell align="center">Patient Name</TableCell>
+            <TableCell align="center">Scans</TableCell>
+            <TableCell align="center">Consultation Date</TableCell>
+            <TableCell align="center">Actions</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHead>
+        <TableBody>
+          {tasks.map((index, value) => (
+            <TableRow key={index} className={classes.tableRow}>
+              <TableCell className={tableCellClasses} align="center">
+                {tasks[value].patient}
+              </TableCell>
+              <TableCell className={tableCellClasses} align="center">
+                {tasks[value].image === true ? 'Uploaded' : <UploadScanButtom />}
+              </TableCell>
+              <TableCell className={tableCellClasses} align="center">
+                {tasks[value].date}
+              </TableCell>
+              <TableCell align="center">
+                <Tooltip
+                  id="tooltip-top"
+                  title="Edit Appointment"
+                  placement="top"
+                  classes={{ tooltip: classes.tooltip }}
+                >
+                  <IconButton
+                    aria-label="Edit"
+                    className={classes.tableActionButton}
+                  >
+                    <MoreVertIcon
+                      className={
+                        classes.tableActionButtonIcon + ' ' + classes.edit
+                      }
+                    />
+                  </IconButton>
+                </Tooltip>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        {uploadScanModal && <Modal content={content} actions={modalActions} />}
+      </Table>
+    </>
   );
 }
 
