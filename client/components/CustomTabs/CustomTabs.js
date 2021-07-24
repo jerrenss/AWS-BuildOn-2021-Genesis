@@ -17,6 +17,7 @@ import lightBlue from '@material-ui/core/colors/lightBlue';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Rating from '@material-ui/lab/Rating';
+import Badge from '@material-ui/core/Badge';
 
 // core components
 import Card from 'components/Card/Card.js';
@@ -35,8 +36,8 @@ export default function CustomTabs(props) {
   const [value, setValue] = useState(0);
   const [rating, setRating] = useState(null);
   const [date, setDate] = useState(null);
-  const handleChange = value => {
-    setValue(value);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
   const useStyles = makeStyles(styles);
   const useStylesForDropdown = makeStyles(theme => ({
@@ -98,12 +99,18 @@ export default function CustomTabs(props) {
     setRating(event.target.value);
   };
 
-  return (
-    <Card plain={plainTabs}>
-      <CardHeader color={headerColor} plain={plainTabs}>
-        {title !== undefined ? <div className={cardTitle}>{title}</div> : null}
-        {isDoctorList ? (
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
+  const CustomBadge = (props) => {
+    const { badgeLabel } = props;
+    return (
+      <Badge badgeContent={1} color="secondary">
+        {badgeLabel}
+      </Badge>
+    )
+  }
+
+  const DoctorList = () => {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
             <div
               style={{
                 marginRight: '30px',
@@ -159,7 +166,14 @@ export default function CustomTabs(props) {
               </MuiPickersUtilsProvider>
             </div>
           </div>
-        ) : null}
+    )
+  }
+
+  return (
+    <Card plain={plainTabs}>
+      <CardHeader color={headerColor} plain={plainTabs}>
+        {title !== undefined ? <div className={cardTitle}>{title}</div> : null}
+        {isDoctorList ? <DoctorList /> : null}
         <Tabs
           value={value}
           onChange={handleChange}
@@ -172,12 +186,6 @@ export default function CustomTabs(props) {
           scrollButtons="auto"
         >
           {tabs.map((prop, key) => {
-            var icon = {};
-            if (prop.tabIcon) {
-              icon = {
-                icon: <prop.tabIcon />,
-              };
-            }
             return (
               <Tab
                 classes={{
@@ -186,8 +194,7 @@ export default function CustomTabs(props) {
                   wrapper: classes.tabWrapper,
                 }}
                 key={key}
-                label={prop.tabName}
-                {...icon}
+                label={prop.tabName === 'Pending' ? <CustomBadge badgeLabel={prop.tabName}/> : prop.tabName}
               />
             );
           })}
