@@ -23,7 +23,7 @@ const DOCTOR_ONGOING = [
   { patient: 'Chen Chen', image: true, date: '15/07/2021' },
 ];
 const DOCTOR_PENDING = [
-  { patient: 'Reuben Loo', image: false, date: '19/07/2021' },
+  { patient: 'Reuben Loo', date: '19/07/2021', symptoms: 'Cough, Fever, Sore Throat' },
 ];
 const DOCTOR_COMPLETED = [
   { patient: 'David Chan', image: true, date: '10/07/2021' },

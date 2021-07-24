@@ -4,15 +4,13 @@ import classnames from 'classnames';
 import axios from 'axios';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
+import DescriptionIcon from '@material-ui/icons/Description';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-// @material-ui/icons
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 // core components
 import Button from '../../components/CustomButtons/Button';
 import Modal from '../../components/Modal/Modal';
@@ -22,10 +20,9 @@ import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.j
 export default function DoctorTasks(props) {
   const [uploadScanModal, setUploadScanModal] = useState(false);
   const [scan, setScan] = useState(null);
-  console.log(scan);
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const { tasks, rtlActive } = props;
+  const { tasks, rtlActive, isPendingTab, isCompletedTab } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
@@ -49,12 +46,12 @@ export default function DoctorTasks(props) {
       .catch(err => console.log(err));
   }
 
-  const UploadScanButtom = () => {
-    return <Button color="info" onClick={() => setUploadScanModal(true)}>Upload Scan</Button>
-  }
-
   const handleImage = (image) => {
     setScan(image);
+  }
+
+  const UploadScanButtom = () => {
+    return <Button color="info" onClick={() => setUploadScanModal(true)}>Upload Scan</Button>
   }
 
   const modalActions = (
@@ -70,47 +67,61 @@ export default function DoctorTasks(props) {
     </>
   )
 
+  const PendingActionButtons = () => {
+    return (
+      <div>
+        <Button color='success'>Accept</Button>
+        <Button color='warning'>Decline</Button>
+      </div>
+    );
+  }
+
+  const ActionButtons = (props) => {
+    const { isCompletedTab } = props;
+    return (
+      <div>
+        <Button color='success'>More Info</Button>
+        {!isCompletedTab && <Button color='warning'>Edit Appointment</Button>}
+      </div>
+    )
+  }
+
+  const FileIcon = (props) => {
+    return (
+      <IconButton>
+        <DescriptionIcon fontSize="large" style={{color: '#3781F5'}}/>
+      </IconButton>
+    )
+  }
+
   return (
     <>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
             <TableCell align="center">Patient Name</TableCell>
-            <TableCell align="center">Scans</TableCell>
-            <TableCell align="center">Consultation Date</TableCell>
+            <TableCell align="center">{isPendingTab ? `Consultation Date` : `Scans`}</TableCell>
+            <TableCell align="center">{isPendingTab ? `Symptoms` : `Consultation Date`}</TableCell>
             <TableCell align="center">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {tasks.map((index, value) => (
             <TableRow key={index} className={classes.tableRow}>
-              <TableCell className={tableCellClasses} align="center">
+              <TableCell className={tableCellClasses} align="center" style={{minWidth: '150px'}}>
                 {tasks[value].patient}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
-                {tasks[value].image === true ? 'Uploaded' : <UploadScanButtom />}
+                {!isPendingTab && (tasks[value].image === true ? <FileIcon /> : <UploadScanButtom />)}
+                {isPendingTab && tasks[value].date}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
-                {tasks[value].date}
+                {!isPendingTab && tasks[value].date}
+                {isPendingTab && tasks[value].symptoms}
               </TableCell>
-              <TableCell align="center">
-                <Tooltip
-                  id="tooltip-top"
-                  title="Edit Appointment"
-                  placement="top"
-                  classes={{ tooltip: classes.tooltip }}
-                >
-                  <IconButton
-                    aria-label="Edit"
-                    className={classes.tableActionButton}
-                  >
-                    <MoreVertIcon
-                      className={
-                        classes.tableActionButtonIcon + ' ' + classes.edit
-                      }
-                    />
-                  </IconButton>
-                </Tooltip>
+              <TableCell align="center" size="small" style={{padding:'0px'}}>
+                {isPendingTab && <PendingActionButtons />}
+                {!isPendingTab && <ActionButtons isCompletedTab={isCompletedTab}/>}
               </TableCell>
             </TableRow>
           ))}

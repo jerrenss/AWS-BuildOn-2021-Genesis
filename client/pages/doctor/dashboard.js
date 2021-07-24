@@ -26,15 +26,18 @@ function Dashboard() {
                         tabs={[
                             {
                                 tabName: 'Ongoing',
+                                tabValue: 0,
                                 tabContent: <DoctorTasks tasks={DOCTOR_ONGOING} />,
                             },
                             {
                                 tabName: 'Pending',
-                                tabContent: <DoctorTasks tasks={DOCTOR_PENDING} />,
+                                tabValue: 1,
+                                tabContent: <DoctorTasks tasks={DOCTOR_PENDING} isPendingTab={true} />,
                             },
                             {
                                 tabName: 'Completed',
-                                tabContent: <DoctorTasks tasks={DOCTOR_COMPLETED} />,
+                                tabValue: 2,
+                                tabContent: <DoctorTasks tasks={DOCTOR_COMPLETED} isCompletedTab={true} />,
                             },
                         ]}
                     />
