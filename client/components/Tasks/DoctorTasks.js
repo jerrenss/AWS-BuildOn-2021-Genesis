@@ -14,12 +14,15 @@ import TableHead from '@material-ui/core/TableHead';
 // core components
 import Button from '../../components/CustomButtons/Button';
 import Modal from '../../components/Modal/Modal';
+import AppointmentInfo from '../../components/AppointmentInfo/AppointmentInfo'
 import ImageUploader from '../../components/ImageUploader/ImageUploader';
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
 
 export default function DoctorTasks(props) {
   const [uploadScanModal, setUploadScanModal] = useState(false);
   const [scan, setScan] = useState(null);
+  const [showMoreInfoModal, setShowMoreInfoModal] = useState(false);
+  const [showMoreInfoPatientName, setShowMoreInfoPatientName] = useState('');
   const useStyles = makeStyles(styles);
   const classes = useStyles();
   const { tasks, rtlActive, isPendingTab, isCompletedTab } = props;
@@ -50,6 +53,15 @@ export default function DoctorTasks(props) {
     setScan(image);
   }
 
+  const handleOnMoreInfoClick = (patientName) => {
+    setShowMoreInfoPatientName(patientName);
+    setShowMoreInfoModal(true);
+  }
+
+  const handleOnCloseClick = () => {
+    setShowMoreInfoModal(false);
+  }
+
   const UploadScanButtom = () => {
     return <Button color="info" onClick={() => setUploadScanModal(true)}>Upload Scan</Button>
   }
@@ -77,10 +89,10 @@ export default function DoctorTasks(props) {
   }
 
   const ActionButtons = (props) => {
-    const { isCompletedTab } = props;
+    const { isCompletedTab, patientName } = props;
     return (
       <div>
-        <Button color='success'>More Info</Button>
+        <Button color='success' onClick={() => handleOnMoreInfoClick(patientName)}>More Info</Button>
         {!isCompletedTab && <Button color='warning'>Edit Appointment</Button>}
       </div>
     )
@@ -121,13 +133,21 @@ export default function DoctorTasks(props) {
               </TableCell>
               <TableCell align="center" size="small" style={{padding:'0px'}}>
                 {isPendingTab && <PendingActionButtons />}
-                {!isPendingTab && <ActionButtons isCompletedTab={isCompletedTab}/>}
+                {!isPendingTab && <ActionButtons isCompletedTab={isCompletedTab} patientName={tasks[value].patient}/>}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
-        {uploadScanModal && <Modal content={content} actions={modalActions} />}
       </Table>
+      {uploadScanModal && <Modal content={content} actions={modalActions} />}
+      {showMoreInfoModal && (
+        <Modal 
+          color="#3781F5" 
+          headerColor="white" 
+          content={<AppointmentInfo doctorName={showMoreInfoPatientName} />}
+          handleOnCloseClick={handleOnCloseClick}
+          />
+      )}
     </>
   );
 }
