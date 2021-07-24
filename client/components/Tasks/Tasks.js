@@ -16,6 +16,8 @@ import DoctorInfo from '../../components/Modal/DoctorInfo';
 import BookingFrom from '../../components/BookingForm/BookingForm';
 import AppointmentInfo from '../../components/AppointmentInfo/AppointmentInfo'
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
+// utils
+import { StatusUtil } from '../../utils/StatusUtil';
 
 const rating = value => {
   switch (value) {
@@ -83,6 +85,7 @@ export default function Tasks(props) {
   const [showDoctorModal, setShowDoctorModal] = useState(false);
   const [showMoreInfoModal, setShowMoreInfoModal] = useState(false);
   const [moreInfoModalDoctor, setMoreInfoModalDoctor] = useState('');
+  const [statusValue, setStatusValue] = useState(1);
   const [selectedDoctor, setSelectedDoctor] = useState('');
   console.log(selectedDoctor);
   const useStyles = makeStyles(styles);
@@ -108,7 +111,6 @@ export default function Tasks(props) {
   }
 
   const handleOnCloseClick = () => {
-    console.log("click");
     setShowMoreInfoModal(false);
   }
 
@@ -139,6 +141,8 @@ export default function Tasks(props) {
     );
   }
 
+  const status = StatusUtil.getStatusType(statusValue);
+
   const doctorModaldescription = <>About Dr Bukayo Saka</>;
 
   const bookingModaldescription = <>Virtual Consultation Appointment Form</>;
@@ -158,7 +162,7 @@ export default function Tasks(props) {
         {!isDoctorList &&
           tasksIndexes.map(value => (
             <TableRow key={value} className={classes.tableRow}>
-              <TableCell className={tableCellClasses} align="center">
+              <TableCell className={tableCellClasses} align="center" style={{minWidth: '200px'}}>
                 {tasks[value].doctor}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
@@ -168,9 +172,9 @@ export default function Tasks(props) {
                 {tasks[value].date}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
-                Test
+                {status}
               </TableCell>
-              <TableCell align="center" padding="checkbox">
+              <TableCell align="center">
                 <ActionsButtons doctor={tasks[value].doctor}/>
               </TableCell>
             </TableRow>
@@ -204,7 +208,7 @@ export default function Tasks(props) {
           />
         )}
         {showMoreInfoModal && (
-          <Modal color="#3781F5"
+          <Modal
             color="#3781F5"
             headerColor="white"
             style={{ height: '600px' }}
