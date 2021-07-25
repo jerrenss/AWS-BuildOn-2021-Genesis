@@ -4,8 +4,56 @@
 
 var bugs = [{ patientId: 1, doctor: 'Dr Bukayo Saka', image: true, date: '20/07/2021' }];
 var doctors = [
-  { name: 'Dr Bukayo Saka', earliestDate: '21/07/2021', rating: 5 },
-  { name: 'Dr Emily Hunt', earliestDate: '23/07/2021', rating: 4 },
+  {
+    name: 'Dr Alison Becker', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Bukayo Saka', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Cristiano Ronaldo', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Daniel Alves', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Emerson Royale', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Francis Coquelin', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Gerard Moreno', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Jadon Sancho', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Keylor Navas', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
+  {
+    name: 'Dr Leonardo Bonucci', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    qualification: 'PhD in Medicine', expertise: 'General Practitioner'
+  },
 ];
 var website = [
   'Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit',

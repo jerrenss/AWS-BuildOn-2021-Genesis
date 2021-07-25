@@ -7,7 +7,7 @@ myVideo.muted = true;
 
 backBtn.addEventListener("click", () => {
   // TODO: Update URL to return to home dashboard
-  window.location.href = "/";
+  window.location.href = "/doctor/dashboard";
 });
 
 showChat.addEventListener("click", () => {
