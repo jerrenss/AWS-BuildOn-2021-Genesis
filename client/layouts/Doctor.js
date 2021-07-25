@@ -7,8 +7,7 @@ import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import { makeStyles } from '@material-ui/core/styles';
 // core components
 import Navbar from 'components/Navbars/DoctorNavBar';
-import Footer from 'components/Footer/Footer.js';
-import Sidebar from 'components/Sidebar/Sidebar.js';
+import Sidebar, { DOCTOR_PROFILE } from 'components/Sidebar/Sidebar.js';
 
 import { doctorRoutes } from 'routes.js';
 
@@ -79,6 +78,7 @@ export default function Doctor({ children, ...rest }) {
             <Sidebar
                 routes={doctorRoutes}
                 logoText={'Doctoristic'}
+                profile={DOCTOR_PROFILE}
                 logo={logo}
                 image={image}
                 handleDrawerToggle={handleDrawerToggle}
