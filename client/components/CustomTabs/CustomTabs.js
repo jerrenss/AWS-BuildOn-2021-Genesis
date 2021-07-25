@@ -100,9 +100,9 @@ export default function CustomTabs(props) {
   };
 
   const CustomBadge = (props) => {
-    const { badgeLabel } = props;
+    const { badgeLabel, badgeValue } = props;
     return (
-      <Badge badgeContent={1} color="secondary">
+      <Badge badgeContent={badgeValue} color="secondary">
         {badgeLabel}
       </Badge>
     )
@@ -194,7 +194,7 @@ export default function CustomTabs(props) {
                   wrapper: classes.tabWrapper,
                 }}
                 key={key}
-                label={prop.tabName === 'Pending' ? <CustomBadge badgeLabel={prop.tabName}/> : prop.tabName}
+                label={prop.tabName === 'Pending' ? <CustomBadge badgeLabel={prop.tabName} badgeValue={prop.numOfTasks} /> : prop.tabName}
               />
             );
           })}

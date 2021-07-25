@@ -25,7 +25,7 @@ export default function DoctorTasks(props) {
   const [showMoreInfoPatientName, setShowMoreInfoPatientName] = useState('');
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const { tasks, rtlActive, isPendingTab, isCompletedTab } = props;
+  const { tasks, rtlActive, isPendingTab, isCompletedTab, handleBookingConfirmation } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
@@ -66,6 +66,16 @@ export default function DoctorTasks(props) {
     return <Button color="info" onClick={() => setUploadScanModal(true)}>Upload Scan</Button>
   }
 
+  const handleAcceptBooking = (acceptedTask) => {
+    const task = {
+      patientId: acceptedTask.patientId,
+      patient: acceptedTask.patient, 
+      image: false, 
+      date: acceptedTask.date
+    };
+    handleBookingConfirmation(task)
+  }
+
   const modalActions = (
     <>
       <Button color="warning" onClick={() => setUploadScanModal(false)}>Cancel</Button>
@@ -79,10 +89,11 @@ export default function DoctorTasks(props) {
     </>
   )
 
-  const PendingActionButtons = () => {
+  const PendingActionButtons = (props) => {
+    const { task } = props;
     return (
       <div>
-        <Button color='success'>Accept</Button>
+        <Button color='success' onClick={() => handleAcceptBooking(task)}>Accept</Button>
         <Button color='warning'>Decline</Button>
       </div>
     );
@@ -132,7 +143,7 @@ export default function DoctorTasks(props) {
                 {isPendingTab && tasks[value].symptoms}
               </TableCell>
               <TableCell align="center" size="small" style={{padding:'0px'}}>
-                {isPendingTab && <PendingActionButtons />}
+                {isPendingTab && <PendingActionButtons  task={tasks[value]} />}
                 {!isPendingTab && <ActionButtons isCompletedTab={isCompletedTab} patientName={tasks[value].patient}/>}
               </TableCell>
             </TableRow>

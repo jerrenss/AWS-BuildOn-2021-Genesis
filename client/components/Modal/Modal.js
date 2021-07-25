@@ -22,7 +22,7 @@ const Modal = props => {
         }}
       >
         <div className="ui standard full screen modal visible active">
-          <i class="close icon" onClick={handleOnCloseClick}></i>
+          <i className="close icon" onClick={handleOnCloseClick}></i>
           <div
             className="ui center aligned header"
             style={{
