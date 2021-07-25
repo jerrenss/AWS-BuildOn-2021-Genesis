@@ -23,18 +23,19 @@ export default function Header(props) {
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
         <div style={{ margin: '20px' }}>
-          <div style={{ fontWeight: '600', marginBottom: '25px' }}>
+          <div style={{ fontWeight: '500', marginBottom: '25px' }}>
             <span style={{ fontSize: '34px', color: 'black' }}>
-              Hello&nbsp;
+              Greetings&nbsp;
             </span>
             <span style={{ fontSize: '34px', color: '#3781F5' }}>Mary</span>
-            <span style={{ fontSize: '34px', color: 'black' }}>!</span>
+            <span style={{ fontSize: '34px', color: 'black' }}>,</span>
           </div>
           <div
             style={{
-              fontSize: '26px',
-              fontWeight: '600',
+              fontSize: '24px',
+              fontWeight: '500',
               color: 'black',
+              fontStyle: 'italic'
             }}
           >
             How are you feeling today?

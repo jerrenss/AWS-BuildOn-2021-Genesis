@@ -32,6 +32,7 @@ const headerStyle = () => ({
   container: {
     ...container,
     minHeight: '50px',
+    borderBottom: '1px dashed grey',
   },
   flex: {
     flex: 1,

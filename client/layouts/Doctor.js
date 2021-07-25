@@ -100,7 +100,7 @@ export default function Doctor({ children, ...rest }) {
                 ) : (
                     <div className={classes.map}>{children}</div>
                 )}
-                {getRoute() ? <Footer /> : null}
+                {/* {getRoute() ? <Footer /> : null} */}
             </div>
         </div>
     );

@@ -27,7 +27,7 @@ function Dashboard() {
         <div style={{ marginTop: '50px' }}>
             <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
-                    <div style={{ fontSize: '26px', fontWeight: '600', color: 'black' }}>
+                    <div style={{ fontSize: '26px', fontWeight: '500', color: 'black' }}>
                         Your Appointments:
                     </div>
                     <CustomTabs
@@ -43,7 +43,7 @@ function Dashboard() {
                                 tabName: 'Pending',
                                 tabValue: 1,
                                 numOfTasks: pendingTasks.length,
-                                tabContent: <DoctorTasks tasks={pendingTasks} isPendingTab={true} handleBookingConfirmation={handleConfirmationOfBooking}/>,
+                                tabContent: <DoctorTasks tasks={pendingTasks} isPendingTab={true} handleBookingConfirmation={handleConfirmationOfBooking} />,
                             },
                             {
                                 tabName: 'Completed',
