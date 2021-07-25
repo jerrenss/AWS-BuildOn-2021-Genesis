@@ -1,8 +1,4 @@
-import React from 'react';
-// react plugin for creating charts
-import ChartistGraph from 'react-chartist';
-// @material-ui/core
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState } from 'react';
 // layout for this page
 import Doctor from 'layouts/Doctor.js';
 // core components
@@ -14,6 +10,19 @@ import CustomTabs from 'components/CustomTabs/CustomTabs.js';
 import { DOCTOR_ONGOING, DOCTOR_PENDING, DOCTOR_COMPLETED } from 'variables/general.js';
 
 function Dashboard() {
+    const [ongoingTasks, setOngoingTasks] = useState(DOCTOR_ONGOING);
+    const [pendingTasks, setPendingTasks] = useState(DOCTOR_PENDING);
+    const [completedTasks, setCompletedTasks] = useState(DOCTOR_COMPLETED);
+
+    const handleConfirmationOfBooking = (newOngoingTask) => {
+        setOngoingTasks([...ongoingTasks, newOngoingTask]);
+        let newPendingTasks = pendingTasks.filter(task => {
+            return task.patientId !== newOngoingTask.patientId
+        })
+        setPendingTasks(newPendingTasks)
+    }
+
+
     return (
         <div style={{ marginTop: '50px' }}>
             <GridContainer>
@@ -27,17 +36,20 @@ function Dashboard() {
                             {
                                 tabName: 'Ongoing',
                                 tabValue: 0,
-                                tabContent: <DoctorTasks tasks={DOCTOR_ONGOING} />,
+                                numOfTasks: ongoingTasks.length,
+                                tabContent: <DoctorTasks tasks={ongoingTasks} />,
                             },
                             {
                                 tabName: 'Pending',
                                 tabValue: 1,
-                                tabContent: <DoctorTasks tasks={DOCTOR_PENDING} isPendingTab={true} />,
+                                numOfTasks: pendingTasks.length,
+                                tabContent: <DoctorTasks tasks={pendingTasks} isPendingTab={true} handleBookingConfirmation={handleConfirmationOfBooking}/>,
                             },
                             {
                                 tabName: 'Completed',
                                 tabValue: 2,
-                                tabContent: <DoctorTasks tasks={DOCTOR_COMPLETED} isCompletedTab={true} />,
+                                numOfTasks: completedTasks.length,
+                                tabContent: <DoctorTasks tasks={completedTasks} isCompletedTab={true} />,
                             },
                         ]}
                     />

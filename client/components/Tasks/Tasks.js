@@ -112,6 +112,15 @@ export default function Tasks(props) {
 
   const handleOnCloseClick = () => {
     setShowMoreInfoModal(false);
+    setShowDoctorModal(false);
+  }
+
+  const handleOnCloseDoctorModalClick = () => {
+    setShowDoctorModal(false);
+  }
+
+  const handleOnCloseBookingClick = () => {
+    setShowBookingModal(false);
   }
 
   const doctorModalButton = (
@@ -195,6 +204,7 @@ export default function Tasks(props) {
             style={{ height: '600px' }}
             actions={doctorModalButton}
             description={doctorModaldescription}
+            handleOnCloseClick={handleOnCloseDoctorModalClick}
           />
         )}
         {showBookingModal && (
@@ -205,6 +215,7 @@ export default function Tasks(props) {
             style={{ height: '600px' }}
             actions={bookingModalButtons}
             description={bookingModaldescription}
+            handleOnCloseClick={handleOnCloseBookingClick}
           />
         )}
         {showMoreInfoModal && (

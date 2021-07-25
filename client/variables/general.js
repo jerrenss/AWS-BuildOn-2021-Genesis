@@ -18,16 +18,16 @@ var server = [
 ];
 
 const DOCTOR_ONGOING = [
-  { patient: 'Mary Lee', image: false, date: '20/07/2021' },
-  { patient: 'Joseph Khoo', image: false, date: '18/07/2021' },
-  { patient: 'Chen Chen', image: true, date: '15/07/2021' },
+  { patientId: 1, patient: 'Mary Lee', image: false, date: '31/07/2021' },
+  { patientId: 2, patient: 'Joseph Khoo', image: false, date: '01/08/2021' },
+  { patientId: 3, patient: 'Chen Chen', image: true, date: '03/08/2021' },
 ];
 const DOCTOR_PENDING = [
-  { patient: 'Reuben Loo', date: '19/07/2021', symptoms: 'Cough, Fever, Sore Throat' },
+  { patientId: 4, patient: 'Reuben Loo', date: '05/08/2021', symptoms: 'Cough, Fever, Sore Throat' },
 ];
 const DOCTOR_COMPLETED = [
-  { patient: 'David Chan', image: true, date: '10/07/2021' },
-  { patient: 'Claire Chan', image: true, date: '10/07/2021' },
+  { patientId: 5, patient: 'David Chan', image: true, date: '10/07/2021' },
+  { patientId: 6, patient: 'Claire Chan', image: true, date: '10/07/2021' },
 ];
 var AVAILABLE_TIMINGS = [
   {
