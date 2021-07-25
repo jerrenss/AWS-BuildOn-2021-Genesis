@@ -30,15 +30,6 @@ const patientRoutes = [
     name: 'Home',
     rtlName: 'لوحة القيادة',
     icon: HomeIcon,
-
-    layout: '/admin',
-  },
-  {
-    path: '/table-list',
-    name: 'Appointment',
-    rtlName: 'ملف تعريفي للمستخدم',
-    icon: AssignmentIcon,
-
     layout: '/admin',
   },
   {
@@ -46,32 +37,35 @@ const patientRoutes = [
     name: 'Doctors',
     rtlName: 'قائمة الجدول',
     icon: Person,
-
     layout: '/admin',
   },
+  // {
+  //   path: '',
+  //   name: 'Appointment',
+  //   rtlName: 'ملف تعريفي للمستخدم',
+  //   icon: AssignmentIcon,
+  //   layout: '#',
+  // },
   {
-    path: '/icons',
+    path: '',
     name: 'Profile',
     rtlName: 'الرموز',
     icon: AccountCircleIcon,
-
-    layout: '/admin',
+    layout: '#',
   },
   {
-    path: '/maps',
+    path: '',
     name: 'Settings',
     rtlName: 'خرائط',
     icon: SettingsIcon,
-
-    layout: '/admin',
+    layout: '#',
   },
   {
-    path: '/notifications',
+    path: '',
     name: 'Log out',
     rtlName: 'إخطارات',
     icon: ExitToAppIcon,
-
-    layout: '/admin',
+    layout: '#',
   },
 ];
 

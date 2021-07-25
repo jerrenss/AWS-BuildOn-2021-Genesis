@@ -51,7 +51,7 @@ export default function DoctorInfo(props) {
             </Box>
             <Box className={classes.sectionWrapper}>
                 <Typography className={classes.sectionTitle} variant="h5">Rating</Typography>
-                <Typography>4.50</Typography>
+                <Typography>5</Typography>
             </Box>
         </>
     );

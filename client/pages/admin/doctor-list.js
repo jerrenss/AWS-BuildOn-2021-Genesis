@@ -38,19 +38,9 @@ function DoctorList() {
     <div style={{ marginTop: '50px' }}>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <span
-            style={{
-              fontSize: '32px',
-              fontWeight: '600',
-              color: '#3781F5',
-              margin: '5px',
-            }}
-          >
-            Doctors
-          </span>
-          <span style={{ fontSize: '26px', fontWeight: '600' }}>
-            &nbsp;for you:
-          </span>
+          <div style={{ fontSize: '26px', fontWeight: '500', color: 'black' }}>
+            Available Doctors:
+          </div>
           <CustomTabs
             isTabs={false}
             isDoctorList={true}

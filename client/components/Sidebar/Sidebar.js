@@ -12,11 +12,15 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Icon from '@material-ui/core/Icon';
+import Typography from '@material-ui/core/ListItem';
 // core components
 import AdminNavbarLinks from 'components/Navbars/AdminNavbarLinks.js';
 import RTLNavbarLinks from 'components/Navbars/RTLNavbarLinks.js';
 
 import styles from 'assets/jss/nextjs-material-dashboard/components/sidebarStyle.js';
+
+export const DOCTOR_PROFILE = 'doctor'
+export const USER_PROFILE = 'user'
 
 export default function Sidebar(props) {
   // used for checking current route
@@ -28,59 +32,63 @@ export default function Sidebar(props) {
   function activeRoute(routeName) {
     return router.route.indexOf(routeName) > -1 ? true : false;
   }
-  const { color, logo, image, logoText, routes } = props;
+  const { color, logo, image, logoText, routes, profile = USER_PROFILE } = props;
   var links = (
-    <List className={classes.list}>
-      {routes.map((prop, key) => {
-        var activePro = ' ';
-        var listItemClasses;
-        if (prop.path === '/upgrade-to-pro') {
-          activePro = classes.activePro + ' ';
-          listItemClasses = classNames({
-            [' ' + classes[color]]: true,
+    <>
+      <List className={classes.list}>
+        {routes.map((prop, key) => {
+          var activePro = ' ';
+          var listItemClasses;
+          if (prop.path === '/upgrade-to-pro') {
+            activePro = classes.activePro + ' ';
+            listItemClasses = classNames({
+              [' ' + classes[color]]: true,
+            });
+          } else {
+            listItemClasses = classNames({
+              [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
+            });
+          }
+          const whiteFontClasses = classNames({
+            [' ' + classes.whiteFont]:
+              activeRoute(prop.layout + prop.path) ||
+              prop.path === '/upgrade-to-pro',
           });
-        } else {
-          listItemClasses = classNames({
-            [' ' + classes[color]]: activeRoute(prop.layout + prop.path),
-          });
-        }
-        const whiteFontClasses = classNames({
-          [' ' + classes.whiteFont]:
-            activeRoute(prop.layout + prop.path) ||
-            prop.path === '/upgrade-to-pro',
-        });
-        return (
-          <Link href={prop.layout + prop.path} key={key}>
-            <a className={activePro + classes.item}>
-              <ListItem button className={classes.itemLink + listItemClasses}>
-                {typeof prop.icon === 'string' ? (
-                  <Icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL]: props.rtlActive,
+          return (
+            <Link href={prop.layout + prop.path} key={key}>
+              <a className={activePro + classes.item}>
+                <ListItem button className={classes.itemLink + listItemClasses}>
+                  {typeof prop.icon === 'string' ? (
+                    <Icon
+                      className={classNames(classes.itemIcon, whiteFontClasses, {
+                        [classes.itemIconRTL]: props.rtlActive,
+                      })}
+                    >
+                      {prop.icon}
+                    </Icon>
+                  ) : (
+                    <prop.icon
+                      className={classNames(classes.itemIcon, whiteFontClasses, {
+                        [classes.itemIconRTL]: props.rtlActive,
+                      })}
+                    />
+                  )}
+                  <ListItemText
+                    primary={props.rtlActive ? prop.rtlName : prop.name}
+                    className={classNames(classes.itemText, whiteFontClasses, {
+                      [classes.itemTextRTL]: props.rtlActive,
                     })}
-                  >
-                    {prop.icon}
-                  </Icon>
-                ) : (
-                  <prop.icon
-                    className={classNames(classes.itemIcon, whiteFontClasses, {
-                      [classes.itemIconRTL]: props.rtlActive,
-                    })}
+                    disableTypography={true}
                   />
-                )}
-                <ListItemText
-                  primary={props.rtlActive ? prop.rtlName : prop.name}
-                  className={classNames(classes.itemText, whiteFontClasses, {
-                    [classes.itemTextRTL]: props.rtlActive,
-                  })}
-                  disableTypography={true}
-                />
-              </ListItem>
-            </a>
-          </Link>
-        );
-      })}
-    </List>
+                </ListItem>
+              </a>
+            </Link>
+          );
+        })}
+      </List>
+      {profile == USER_PROFILE ? <Typography style={{ display: 'block', textAlign: 'center', color: '#FFFFFF', backgroundColor: '#3781F5', fontWeight: 500, marginTop: '16px', fontSize: '16px' }}>User Premium Plan</Typography> :
+        <Typography style={{ display: 'block', textAlign: 'center', color: '#000000', backgroundColor: ' #FFFFFF', fontWeight: 500, marginTop: '16px', fontSize: '16px' }}>Doctor Premium Plan</Typography>}
+    </>
   );
   var brand = (
     <div className={classes.logo}>

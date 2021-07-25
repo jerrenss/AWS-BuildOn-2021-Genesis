@@ -225,10 +225,15 @@ video {
 
 .header__back {
   position: absolute;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   top: 17px;
   left: 28px;
   color: #fff;
+  cursor: pointer;
+}
+
+.back__text {
+  display: inline;
 }
 
 @media (max-width: 700px) {

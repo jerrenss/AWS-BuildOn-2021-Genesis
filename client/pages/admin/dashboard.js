@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 // layout for this page
 import Admin from 'layouts/Admin.js';
 // core components
@@ -8,7 +8,7 @@ import Tasks from 'components/Tasks/Tasks.js';
 import CustomTabs from 'components/CustomTabs/CustomTabs.js';
 import Button from '../../components/CustomButtons/Button';
 import { useAppContext } from '../../context/state';
-
+import Link from '@material-ui/core/Link';
 import { bugs, website } from 'variables/general.js';
 
 function Dashboard() {
@@ -16,10 +16,10 @@ function Dashboard() {
   const [completedAppt, setCompletedAppt] = useState(website);
   const value = useAppContext();
   const { newBooking } = value;
-  
+
   useEffect(() => {
-    if(newBooking !== null){
-      let newAppt = {patientId: 2, doctor: 'Dr Bukayo Saka', image: false, date: newBooking.date};
+    if (newBooking !== null) {
+      let newAppt = { patientId: 2, doctor: 'Dr Bukayo Saka', image: false, date: newBooking.date };
       let filteredOnGoingAppt = ongoingAppt.filter(appt => {
         return appt.patientId !== 2
       })
@@ -32,12 +32,12 @@ function Dashboard() {
     <div style={{ marginTop: '50px' }}>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <Button color="info"><span style={{fontSize: '14px'}}>Book a virtual consultation now</span></Button>
+          <Button color="info"><span style={{ fontSize: '14px' }}><Link href="/admin/doctor-list" color='inherit' underline='none'>Book a virtual consultation now</Link></span></Button>
         </GridItem>
       </GridContainer>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <div style={{ fontSize: '26px', fontWeight: '600', color: 'black' }}>
+          <div style={{ fontSize: '26px', fontWeight: '500', color: 'black' }}>
             Your Appointments:
           </div>
           <CustomTabs

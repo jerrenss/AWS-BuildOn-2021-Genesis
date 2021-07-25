@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // core components
 import Navbar from 'components/Navbars/Navbar.js';
 import Footer from 'components/Footer/Footer.js';
-import Sidebar from 'components/Sidebar/Sidebar.js';
+import Sidebar, { USER_PROFILE } from 'components/Sidebar/Sidebar.js';
 
 import { patientRoutes } from 'routes.js';
 
@@ -80,6 +80,7 @@ export default function Admin({ children, ...rest }) {
         routes={patientRoutes}
         logoText={'Doctoristic'}
         logo={logo}
+        profile={USER_PROFILE}
         image={image}
         handleDrawerToggle={handleDrawerToggle}
         open={mobileOpen}
@@ -100,7 +101,7 @@ export default function Admin({ children, ...rest }) {
         ) : (
           <div className={classes.map}>{children}</div>
         )}
-        {getRoute() ? <Footer /> : null}
+        {/* {getRoute() ? <Footer /> : null} */}
       </div>
     </div>
   );
