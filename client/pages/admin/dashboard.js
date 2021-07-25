@@ -1,8 +1,4 @@
-import React from 'react';
-// react plugin for creating charts
-import ChartistGraph from 'react-chartist';
-// @material-ui/core
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect} from 'react';
 // layout for this page
 import Admin from 'layouts/Admin.js';
 // core components
@@ -11,10 +7,27 @@ import GridContainer from 'components/Grid/GridContainer.js';
 import Tasks from 'components/Tasks/Tasks.js';
 import CustomTabs from 'components/CustomTabs/CustomTabs.js';
 import Button from '../../components/CustomButtons/Button';
+import { useAppContext } from '../../context/state';
 
 import { bugs, website } from 'variables/general.js';
 
 function Dashboard() {
+  const [ongoingAppt, setOngoingAppt] = useState(bugs);
+  const [completedAppt, setCompletedAppt] = useState(website);
+  const value = useAppContext();
+  const { newBooking } = value;
+  
+  useEffect(() => {
+    if(newBooking !== null){
+      let newAppt = {patientId: 2, doctor: 'Dr Bukayo Saka', image: false, date: newBooking.date};
+      let filteredOnGoingAppt = ongoingAppt.filter(appt => {
+        return appt.patientId !== 2
+      })
+      filteredOnGoingAppt = [...filteredOnGoingAppt, newAppt];
+      setOngoingAppt([...ongoingAppt, newAppt]);
+    }
+  }, [newBooking])
+
   return (
     <div style={{ marginTop: '50px' }}>
       <GridContainer>
@@ -34,8 +47,7 @@ function Dashboard() {
                 tabName: 'Ongoing',
                 tabContent: (
                   <Tasks
-                    tasksIndexes={[0]}
-                    tasks={bugs}
+                    tasks={ongoingAppt}
                     headers={[
                       'Doctor Name',
                       'Scans',
@@ -50,8 +62,7 @@ function Dashboard() {
                 tabName: 'Completed',
                 tabContent: (
                   <Tasks
-                    tasksIndexes={[0, 1]}
-                    tasks={website}
+                    tasks={completedAppt}
                     headers={[
                       'Doctor Name',
                       'Scans',

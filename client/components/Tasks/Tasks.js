@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useContext } from 'react';
+import Link from "next/link"
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 // @material-ui/core components
@@ -9,6 +10,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import Rating from '@material-ui/lab/Rating';
+import DescriptionIcon from '@material-ui/icons/Description';
+import IconButton from '@material-ui/core/IconButton';
 // core components
 import Button from '../../components/CustomButtons/Button';
 import Modal from '../../components/Modal/Modal';
@@ -18,6 +21,7 @@ import AppointmentInfo from '../../components/AppointmentInfo/AppointmentInfo'
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
 // utils
 import { StatusUtil } from '../../utils/StatusUtil';
+import { useAppContext } from '../../context/state';
 
 const rating = value => {
   switch (value) {
@@ -84,16 +88,17 @@ export default function Tasks(props) {
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [showDoctorModal, setShowDoctorModal] = useState(false);
   const [showMoreInfoModal, setShowMoreInfoModal] = useState(false);
+  const [booking, setBooking] = useState({});
   const [moreInfoModalDoctor, setMoreInfoModalDoctor] = useState('');
   const [statusValue, setStatusValue] = useState(1);
   const [selectedDoctor, setSelectedDoctor] = useState('');
-  console.log(selectedDoctor);
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const { tasksIndexes, tasks, rtlActive, headers, isDoctorList } = props;
+  const { tasks, rtlActive, headers, isDoctorList } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
+  const value  = useAppContext();
 
   const handleBookingButtonClick = event => {
     setSelectedDoctor(event.target.value);
@@ -123,6 +128,14 @@ export default function Tasks(props) {
     setShowBookingModal(false);
   }
 
+  const handleOnFormChange = (booking) => {
+   setBooking(booking);
+  }
+
+  const handleBookingSubmit = () =>{
+    value.setNewBooking(booking);
+  }
+
   const doctorModalButton = (
     <>
       <Button color="warning" onClick={() => setShowDoctorModal(false)}>
@@ -131,12 +144,22 @@ export default function Tasks(props) {
     </>
   );
 
+  const SubmitButton = forwardRef(({onClick, href}, ref) => {
+    return (
+      <Button color="info" onClick={onClick} ref={ref} href={href}>
+          Submit
+      </Button>
+    )
+  })
+
   const bookingModalButtons = (
     <>
       <Button color="warning" onClick={() => setShowBookingModal(false)}>
         Back
       </Button>
-      <Button color="info">Submit</Button>
+      <Link href="/admin/dashboard" passHref>
+        <SubmitButton onClick={handleBookingSubmit}/>
+      </Link>
     </>
   );
 
@@ -148,6 +171,14 @@ export default function Tasks(props) {
         <Button color='warning'>Edit Appointment</Button>
       </div>
     );
+  }
+
+  const FileIcon = (props) => {
+    return (
+      <IconButton>
+        <DescriptionIcon fontSize="large" style={{color: '#3781F5'}}/>
+      </IconButton>
+    )
   }
 
   const status = StatusUtil.getStatusType(statusValue);
@@ -169,22 +200,22 @@ export default function Tasks(props) {
       </TableHead>
       <TableBody>
         {!isDoctorList &&
-          tasksIndexes.map(value => (
-            <TableRow key={value} className={classes.tableRow}>
+          tasks.map(task => (
+            <TableRow key={task.patientId} className={classes.tableRow}>
               <TableCell className={tableCellClasses} align="center" style={{minWidth: '200px'}}>
-                {tasks[value].doctor}
+                {task.doctor}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
-                {tasks[value].image === true ? 'true' : '-'}
+                {task.image === true ? <FileIcon /> : '-'}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
-                {tasks[value].date}
+                {task.date}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
                 {status}
               </TableCell>
               <TableCell align="center">
-                <ActionsButtons doctor={tasks[value].doctor}/>
+                <ActionsButtons doctor={task.doctor}/>
               </TableCell>
             </TableRow>
           ))}
@@ -209,7 +240,7 @@ export default function Tasks(props) {
         )}
         {showBookingModal && (
           <Modal
-            content={<BookingFrom selectedDoctor={selectedDoctor} />}
+            content={<BookingFrom selectedDoctor={selectedDoctor} onFormChange={handleOnFormChange}/>}
             color="#3781F5"
             headerColor="white"
             style={{ height: '600px' }}
