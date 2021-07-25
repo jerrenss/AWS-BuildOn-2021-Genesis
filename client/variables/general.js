@@ -2,7 +2,7 @@
 // // // Tasks for TasksCard - see Dashboard view
 // #############################
 
-var bugs = [{ doctor: 'Dr Bukayo Saka', image: true, date: '20/07/2021' }];
+var bugs = [{ patientId: 1, doctor: 'Dr Bukayo Saka', image: true, date: '20/07/2021' }];
 var doctors = [
   { name: 'Dr Bukayo Saka', earliestDate: '21/07/2021', rating: 5 },
   { name: 'Dr Emily Hunt', earliestDate: '23/07/2021', rating: 4 },

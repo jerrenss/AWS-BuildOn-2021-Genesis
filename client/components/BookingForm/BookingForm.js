@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import MomentUtils from '@date-io/moment';
@@ -20,11 +20,10 @@ import { AVAILABLE_TIMINGS } from '../../variables/general';
 export default function BookingForm(props) {
   const [consultationDate, setConsultationDate] = useState(null);
   const [consultationTime, setConsultationTime] = useState('');
-  console.log(consultationTime);
   const [symptoms, setSymptoms] = useState('');
   const [medication, setMedication] = useState('');
   const [allergies, setAllergies] = useState('');
-  const { selectedDoctor } = props;
+  const { selectedDoctor, onFormChange } = props;
   const materialTheme = createMuiTheme({
     overrides: {
       MuiPickersToolbar: {
@@ -48,6 +47,17 @@ export default function BookingForm(props) {
       },
     },
   });
+
+  useEffect(() => {
+    let booking = {
+      date: consultationDate !== null ? consultationDate.format("DD/MM/YYYY") : '',
+      time: consultationTime, 
+      symptoms: symptoms,
+      medication: medication,
+      allergies: allergies,
+    }
+    onFormChange(booking);
+  }, [consultationDate, consultationTime, symptoms, medication, allergies]);
 
   const useStylesForDropdown = makeStyles(theme => ({
     formControl: {
