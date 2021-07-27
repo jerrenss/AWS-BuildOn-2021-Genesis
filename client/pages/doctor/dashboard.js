@@ -22,6 +22,12 @@ function Dashboard() {
         setPendingTasks(newPendingTasks)
     }
 
+    const handleUpdatePatientScan = (patientId) => {
+        const currOngoingTasks = [...ongoingTasks]
+        // Use patientId as index to update image flag
+        currOngoingTasks[patientId - 1].image = true
+        setOngoingTasks(currOngoingTasks)
+    }
 
     return (
         <div style={{ marginTop: '50px' }}>
@@ -37,7 +43,7 @@ function Dashboard() {
                                 tabName: 'Ongoing',
                                 tabValue: 0,
                                 numOfTasks: ongoingTasks.length,
-                                tabContent: <DoctorTasks tasks={ongoingTasks} />,
+                                tabContent: <DoctorTasks tasks={ongoingTasks} handleUpdatePatientScan={handleUpdatePatientScan} />,
                             },
                             {
                                 tabName: 'Pending',

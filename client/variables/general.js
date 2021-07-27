@@ -124,6 +124,23 @@ var AVAILABLE_TIMINGS = [
   },
 ];
 
+const LUNG_COMPLICATIONS = [
+  { complication: 'Atelectasis', probability: 0.802 },
+  { complication: 'Cardiomegaly', probability: 0.884 },
+  { complication: 'Effusion', probability: 0.873 },
+  { complication: 'Infiltration', probability: 0.698 },
+  { complication: 'Mass', probability: 0.821 },
+  { complication: 'Nodule', probability: 0.817 },
+  { complication: 'Pneumonia', probability: 0.739 },
+  { complication: 'Pneumothorax', probability: 0.878 },
+  { complication: 'Consolidation', probability: 0.785 },
+  { complication: 'Edema', probability: 0.879 },
+  { complication: 'Emphysema', probability: 0.933 },
+  { complication: 'Fibrosis', probability: 0.822 },
+  { complication: 'Pleural Thickening', probability: 0.785 },
+  { complication: 'Hernia', probability: 0.911 },
+]
+
 module.exports = {
   AVAILABLE_TIMINGS,
   DOCTOR_ONGOING,
@@ -133,4 +150,5 @@ module.exports = {
   website,
   server,
   doctors,
+  LUNG_COMPLICATIONS,
 };
