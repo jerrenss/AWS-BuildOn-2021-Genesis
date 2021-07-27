@@ -86,8 +86,8 @@ export default function Sidebar(props) {
           );
         })}
       </List>
-      {profile == USER_PROFILE ? <Typography style={{ display: 'block', textAlign: 'center', color: '#FFFFFF', backgroundColor: '#3781F5', fontWeight: 500, marginTop: '16px', fontSize: '16px' }}>User Premium Plan</Typography> :
-        <Typography style={{ display: 'block', textAlign: 'center', color: '#000000', backgroundColor: ' #FFFFFF', fontWeight: 500, marginTop: '16px', fontSize: '16px' }}>Doctor Premium Plan</Typography>}
+      {profile == USER_PROFILE ? <Typography style={{ display: 'block', textAlign: 'center', color: '#FFFFFF', backgroundColor: '#E60000', fontWeight: 500, marginTop: '16px', fontSize: '16px' }}>User Premium Plan</Typography> :
+        <Typography style={{ display: 'block', textAlign: 'center', color: '#FFFFFF', backgroundColor: ' #3781F5', fontWeight: 500, marginTop: '16px', fontSize: '16px' }}>Doctor Premium Plan</Typography>}
     </>
   );
   var brand = (

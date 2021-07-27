@@ -9,52 +9,52 @@ const MAIN_CHARACTER_SPECIALIST = "Hermione Granger"
 var bugs = [{ patientId: 1, doctor: MAIN_CHARACTER_DOCTOR, image: true, date: '20/07/2021' }];
 var doctors = [
   {
-    name: 'Dr Ron Weasly', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Ron Weasly', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Albus Dumbledore', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Albus Dumbledore', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Severus Snape', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Severus Snape', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Rebeus Hagrid', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Rebeus Hagrid', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Luna Lovegood', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Luna Lovegood', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Neville Longbottom', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Neville Longbottom', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Sirius Black', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Sirius Black', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Dolores Umbridge', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Dolores Umbridge', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Lucius Malfoy', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Lucius Malfoy', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Ginny Weasly', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
+    name: 'Dr Ginny Weasly', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
     hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
