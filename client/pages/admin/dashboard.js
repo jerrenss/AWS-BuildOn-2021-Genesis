@@ -10,12 +10,19 @@ import Button from '../../components/CustomButtons/Button';
 import { useAppContext } from '../../context/state';
 import Link from '@material-ui/core/Link';
 import { MAIN_CHARACTER_DOCTOR } from 'variables/general';
+import { useRouter } from 'next/router'
 
 function Dashboard() {
   const [ongoingAppt, setOngoingAppt] = useState([]);
   const [completedAppt, setCompletedAppt] = useState([]);
+  const router = useRouter()
   const value = useAppContext();
   const { newBooking } = value;
+
+  const handleClickBookingBtn = (e) => {
+    e.preventDefault()
+    router.push("/admin/doctor-list")
+  }
 
   useEffect(() => {
     if (newBooking !== null) {
@@ -32,7 +39,7 @@ function Dashboard() {
     <div style={{ marginTop: '50px' }}>
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-          <Button color="info"><span style={{ fontSize: '14px' }}><Link href="/admin/doctor-list" color='inherit' underline='none'>Book a virtual consultation now</Link></span></Button>
+          <Button color="info" onClick={handleClickBookingBtn}><span style={{ fontSize: '14px' }}>Book a virtual consultation now</span></Button>
         </GridItem>
       </GridContainer>
       <GridContainer>
