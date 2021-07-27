@@ -2,56 +2,60 @@
 // // // Tasks for TasksCard - see Dashboard view
 // #############################
 
-var bugs = [{ patientId: 1, doctor: 'Dr Bukayo Saka', image: true, date: '20/07/2021' }];
+const MAIN_CHARACTER_PATIENT = "Harry Potter"
+const MAIN_CHARACTER_DOCTOR = "Ron Weasly"
+const MAIN_CHARACTER_SPECIALIST = "Hermione Granger"
+
+var bugs = [{ patientId: 1, doctor: MAIN_CHARACTER_DOCTOR, image: true, date: '20/07/2021' }];
 var doctors = [
   {
-    name: 'Dr Alison Becker', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Ron Weasly', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Bukayo Saka', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Albus Dumbledore', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Cristiano Ronaldo', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Severus Snape', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Daniel Alves', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Rebeus Hagrid', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Emerson Royale', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Luna Lovegood', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Francis Coquelin', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Neville Longbottom', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Gerard Moreno', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Sirius Black', earliestDate: '21/07/2021', rating: 3, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Jadon Sancho', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Dolores Umbridge', earliestDate: '21/07/2021', rating: 4, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Keylor Navas', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Lucius Malfoy', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
   {
-    name: 'Dr Leonardo Bonucci', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://i.pinimg.com/originals/1a/9e/9b/1a9e9be4eb35017ac74ac0c7c011ba19.png',
-    hospital: 'Hospital Del Luna', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    name: 'Dr Ginny Weasly', earliestDate: '21/07/2021', rating: 5, displayImage: 'https://www.nicepng.com/png/full/313-3130076_ron-weasley4-ron-weasley.png',
+    hospital: 'Hospital Hogwarts', about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     qualification: 'PhD in Medicine', expertise: 'General Practitioner'
   },
 ];
@@ -66,16 +70,16 @@ var server = [
 ];
 
 const DOCTOR_ONGOING = [
-  { patientId: 1, patient: 'Mary Lee', image: false, date: '31/07/2021' },
-  { patientId: 2, patient: 'Joseph Khoo', image: false, date: '01/08/2021' },
-  { patientId: 3, patient: 'Chen Chen', image: true, date: '03/08/2021' },
+  { patientId: 1, patient: 'Bellatrix Lestrage', image: false, date: '31/07/2021' },
+  { patientId: 2, patient: 'Draco Malfoy', image: false, date: '01/08/2021' },
+  { patientId: 3, patient: 'Dobby', image: true, date: '03/08/2021' },
 ];
 const DOCTOR_PENDING = [
-  { patientId: 4, patient: 'Reuben Loo', date: '05/08/2021', symptoms: 'Cough, Fever, Sore Throat' },
+  { patientId: 4, patient: MAIN_CHARACTER_PATIENT, date: '05/08/2021', symptoms: 'Cough, Fever, Sore Throat' },
 ];
 const DOCTOR_COMPLETED = [
-  { patientId: 5, patient: 'David Chan', image: true, date: '10/07/2021' },
-  { patientId: 6, patient: 'Claire Chan', image: true, date: '10/07/2021' },
+  { patientId: 5, patient: 'Narcissa Malfoy', image: true, date: '10/07/2021' },
+  { patientId: 6, patient: 'Hedwig', image: true, date: '10/07/2021' },
 ];
 var AVAILABLE_TIMINGS = [
   {
@@ -151,4 +155,7 @@ module.exports = {
   server,
   doctors,
   LUNG_COMPLICATIONS,
+  MAIN_CHARACTER_PATIENT,
+  MAIN_CHARACTER_DOCTOR,
+  MAIN_CHARACTER_SPECIALIST
 };

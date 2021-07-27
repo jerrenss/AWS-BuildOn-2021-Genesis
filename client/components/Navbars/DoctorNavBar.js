@@ -8,6 +8,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import styles from 'assets/jss/nextjs-material-dashboard/components/headerStyle.js';
+import { MAIN_CHARACTER_DOCTOR } from 'variables/general';
 
 export default function Header(props) {
     // used for checking current route
@@ -27,7 +28,7 @@ export default function Header(props) {
                         <span style={{ fontSize: '34px', color: 'black' }}>
                             Greetings&nbsp;
                         </span>
-                        <span style={{ fontSize: '34px', color: '#3781F5' }}>Dr Bukayo Saka</span>
+                        <span style={{ fontSize: '34px', color: '#3781F5' }}>{`Dr ${MAIN_CHARACTER_DOCTOR}`}</span>
                         <span style={{ fontSize: '34px', color: 'black' }}>,</span>
                     </div>
                     <div

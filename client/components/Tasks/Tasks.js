@@ -22,6 +22,7 @@ import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.j
 // utils
 import { StatusUtil } from '../../utils/StatusUtil';
 import { useAppContext } from '../../context/state';
+import { MAIN_CHARACTER_DOCTOR } from 'variables/general';
 
 const rating = value => {
   switch (value) {
@@ -98,7 +99,7 @@ export default function Tasks(props) {
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
-  const value  = useAppContext();
+  const value = useAppContext();
 
   const handleBookingButtonClick = event => {
     setSelectedDoctor(event.target.value);
@@ -129,10 +130,10 @@ export default function Tasks(props) {
   }
 
   const handleOnFormChange = (booking) => {
-   setBooking(booking);
+    setBooking(booking);
   }
 
-  const handleBookingSubmit = () =>{
+  const handleBookingSubmit = () => {
     value.setNewBooking(booking);
   }
 
@@ -144,10 +145,10 @@ export default function Tasks(props) {
     </>
   );
 
-  const SubmitButton = forwardRef(({onClick, href}, ref) => {
+  const SubmitButton = forwardRef(({ onClick, href }, ref) => {
     return (
       <Button color="info" onClick={onClick} ref={ref} href={href}>
-          Submit
+        Submit
       </Button>
     )
   })
@@ -158,7 +159,7 @@ export default function Tasks(props) {
         Back
       </Button>
       <Link href="/admin/dashboard" passHref>
-        <SubmitButton onClick={handleBookingSubmit}/>
+        <SubmitButton onClick={handleBookingSubmit} />
       </Link>
     </>
   );
@@ -176,14 +177,14 @@ export default function Tasks(props) {
   const FileIcon = (props) => {
     return (
       <IconButton>
-        <DescriptionIcon fontSize="large" style={{color: '#3781F5'}}/>
+        <DescriptionIcon fontSize="large" style={{ color: '#3781F5' }} />
       </IconButton>
     )
   }
 
   const status = StatusUtil.getStatusType(statusValue);
 
-  const doctorModaldescription = <>About Dr Bukayo Saka</>;
+  const doctorModaldescription = `About ${MAIN_CHARACTER_DOCTOR}`;
 
   const bookingModaldescription = <>Virtual Consultation Appointment Form</>;
 
@@ -202,7 +203,7 @@ export default function Tasks(props) {
         {!isDoctorList &&
           tasks.map(task => (
             <TableRow key={task.patientId} className={classes.tableRow}>
-              <TableCell className={tableCellClasses} align="center" style={{minWidth: '200px'}}>
+              <TableCell className={tableCellClasses} align="center" style={{ minWidth: '200px' }}>
                 {task.doctor}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
@@ -215,7 +216,7 @@ export default function Tasks(props) {
                 {status}
               </TableCell>
               <TableCell align="center">
-                <ActionsButtons doctor={task.doctor}/>
+                <ActionsButtons doctor={task.doctor} />
               </TableCell>
             </TableRow>
           ))}
@@ -240,7 +241,7 @@ export default function Tasks(props) {
         )}
         {showBookingModal && (
           <Modal
-            content={<BookingFrom selectedDoctor={selectedDoctor} onFormChange={handleOnFormChange}/>}
+            content={<BookingFrom selectedDoctor={selectedDoctor} onFormChange={handleOnFormChange} />}
             color="#3781F5"
             headerColor="white"
             style={{ height: '600px' }}
@@ -255,7 +256,7 @@ export default function Tasks(props) {
             headerColor="white"
             style={{ height: '600px' }}
             handleOnCloseClick={handleOnCloseClick}
-            content={<AppointmentInfo doctorName={moreInfoModalDoctor}/>}
+            content={<AppointmentInfo doctorName={moreInfoModalDoctor} />}
             description={appointmentInfoDescription}
           />
         )}
