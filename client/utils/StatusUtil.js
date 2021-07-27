@@ -11,19 +11,22 @@ export class StatusUtil {
             case 3:
                 status = 'Referred to Specialist and Awaiting Confirmation'
                 break;
-            case 4:
-                status = 'Initial Specialist Consultation Completed and Awaiting Lab Scans'
+            case 4: 
+                status = "Specialist Booking Confirmed and Awaiting Specialist Consultation"
                 break;
             case 5:
-                status = 'Lab Scans Uploaded and Awaiting Specialist Follow-Up Consultation'
+                status = 'Initial Specialist Consultation Completed and Awaiting Lab Scans'
                 break;
             case 6:
-                status = 'Consultation Completed and Medication Prescribed'
+                status = 'Lab Scans Uploaded and Awaiting Specialist Follow-Up Consultation'
                 break;
             case 7:
-                status = 'Status 7'
+                status = 'Consultation Completed and Medication Prescribed'
                 break;
             case 8:
+                status = 'Status 7'
+                break;
+            case 9:
                 status = 'Status 8'
                 break;
         }

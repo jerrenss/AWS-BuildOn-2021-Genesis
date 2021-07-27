@@ -24,6 +24,7 @@ const useStyles = makeStyles(() =>
 
 export default function DoctorInfo(props) {
     const classes = useStyles()
+    const { selectedDoctor } = props;
 
     return (
         <>
