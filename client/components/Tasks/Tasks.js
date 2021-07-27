@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, useContext } from 'react';
+import React, { useState, forwardRef, useContext, useEffect } from 'react';
 import Link from "next/link"
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
@@ -46,6 +46,7 @@ const DoctorList = props => {
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
+
   return (
     <>
       {doctorList.map(doctor => {
@@ -63,7 +64,7 @@ const DoctorList = props => {
             <TableCell align="center">
               <Button
                 color="info"
-                onClick={onDoctorButtonClick}
+                onClick={event => onDoctorButtonClick(event.target.value)}
                 style={{ width: "130px", marginLeft: "16px" }}
                 value={doctor.name}
               >
@@ -100,6 +101,10 @@ export default function Tasks(props) {
     [classes.tableCellRTL]: rtlActive,
   });
   const value = useAppContext();
+  const status = StatusUtil.getStatusType(statusValue);
+  const doctorModaldescription = `About ${MAIN_CHARACTER_DOCTOR}`;
+  const bookingModaldescription = <>Virtual Consultation Appointment Form</>;
+  const appointmentInfoDescription = <>More Information About Appointment</>
 
   const handleBookingButtonClick = event => {
     setSelectedDoctor(event.target.value);
@@ -107,8 +112,8 @@ export default function Tasks(props) {
   };
 
   const handleDoctorButtonClick = event => {
-    setSelectedDoctor(event.target.value);
-    setShowDoctorModal(true);
+    setSelectedDoctor(event);
+    setShowDoctorModal(true)
   };
 
   const handleMoreInfoClick = event => {
@@ -181,14 +186,6 @@ export default function Tasks(props) {
       </IconButton>
     )
   }
-
-  const status = StatusUtil.getStatusType(statusValue);
-
-  const doctorModaldescription = `About ${MAIN_CHARACTER_DOCTOR}`;
-
-  const bookingModaldescription = <>Virtual Consultation Appointment Form</>;
-
-  const appointmentInfoDescription = <>More Information About Appointment</>
 
   return (
     <Table className={classes.table}>

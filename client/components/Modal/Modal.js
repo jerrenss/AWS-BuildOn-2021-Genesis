@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const Modal = props => {
   const [isBrowser, setIsBrowser] = useState(false);
-  const { handleOnCloseClick } = props;
+  const { handleOnCloseClick, isSecondModal } = props;
 
   useEffect(() => {
     setIsBrowser(true);

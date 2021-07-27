@@ -51,7 +51,6 @@ function DoctorList() {
                 tabContent: (
                   <Tasks
                     isDoctorList={true}
-                    tasksIndexes={[0, 1]}
                     tasks={doctors}
                     headers={[
                       'Doctor Name',
