@@ -17,15 +17,18 @@ import Modal from '../../components/Modal/Modal';
 import AppointmentInfo from '../../components/AppointmentInfo/AppointmentInfo'
 import ImageUploader from '../../components/ImageUploader/ImageUploader';
 import styles from 'assets/jss/nextjs-material-dashboard/components/tasksStyle.js';
+import ScanResult from '../../components/Modal/ScanResult';
 
 export default function DoctorTasks(props) {
   const [uploadScanModal, setUploadScanModal] = useState(false);
+  const [scanResultModal, setScanResultModal] = useState(false);
   const [scan, setScan] = useState(null);
   const [showMoreInfoModal, setShowMoreInfoModal] = useState(false);
   const [showMoreInfoPatientName, setShowMoreInfoPatientName] = useState('');
+  const [scanImageURL, setScanImageURL] = useState('https://i0.wp.com/www.aliem.com/wp-content/uploads/2020/04/LobarPNA.png?fit=559%2C425&ssl=1')
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const { tasks, rtlActive, isPendingTab, isCompletedTab, handleBookingConfirmation } = props;
+  const { tasks, rtlActive, isPendingTab, isCompletedTab, handleBookingConfirmation, handleUpdatePatientScan } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
@@ -34,7 +37,8 @@ export default function DoctorTasks(props) {
 
   const uploadImage = () => {
     const formData = new FormData()
-    formData.append('patientId', 1)
+    const patientId = 4
+    formData.append('patientId', patientId)
     formData.append('scanFile', scan[0])
     axios({
       method: 'post',
@@ -44,9 +48,16 @@ export default function DoctorTasks(props) {
     })
       .then(res => {
         console.log(res.data)
+        setScanImageURL(res.data.location)
         setUploadScanModal(false)
+        handleUpdatePatientScan(patientId)
       })
       .catch(err => console.log(err));
+  }
+
+  const displayImage = () => {
+    // window.open(scanImageURL, '_blank');
+    setScanResultModal(true)
   }
 
   const handleImage = (image) => {
@@ -62,15 +73,16 @@ export default function DoctorTasks(props) {
     setShowMoreInfoModal(false);
   }
 
-  const UploadScanButtom = () => {
+  const UploadScanButton = (props) => {
+    const { index } = props
     return <Button color="info" onClick={() => setUploadScanModal(true)}>Upload Scan</Button>
   }
 
   const handleAcceptBooking = (acceptedTask) => {
     const task = {
       patientId: acceptedTask.patientId,
-      patient: acceptedTask.patient, 
-      image: false, 
+      patient: acceptedTask.patient,
+      image: false,
       date: acceptedTask.date
     };
     handleBookingConfirmation(task)
@@ -82,6 +94,14 @@ export default function DoctorTasks(props) {
       <Button color="info" onClick={uploadImage}>Done</Button>
     </>
   )
+
+  const scanModalActions = (
+    <>
+      <Button color="warning" onClick={() => setScanResultModal(false)}>
+        Back
+      </Button>
+    </>
+  );
 
   const content = (
     <>
@@ -111,8 +131,8 @@ export default function DoctorTasks(props) {
 
   const FileIcon = (props) => {
     return (
-      <IconButton>
-        <DescriptionIcon fontSize="large" style={{color: '#3781F5'}}/>
+      <IconButton onClick={displayImage}>
+        <DescriptionIcon fontSize="large" style={{ color: '#3781F5' }} />
       </IconButton>
     )
   }
@@ -131,33 +151,41 @@ export default function DoctorTasks(props) {
         <TableBody>
           {tasks.map((index, value) => (
             <TableRow key={index} className={classes.tableRow}>
-              <TableCell className={tableCellClasses} align="center" style={{minWidth: '150px'}}>
+              <TableCell className={tableCellClasses} align="center" style={{ minWidth: '150px' }}>
                 {tasks[value].patient}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
-                {!isPendingTab && (tasks[value].image === true ? <FileIcon /> : <UploadScanButtom />)}
+                {!isPendingTab && (tasks[value].image === true ? <FileIcon /> : <UploadScanButton index={index} />)}
                 {isPendingTab && tasks[value].date}
               </TableCell>
               <TableCell className={tableCellClasses} align="center">
                 {!isPendingTab && tasks[value].date}
                 {isPendingTab && tasks[value].symptoms}
               </TableCell>
-              <TableCell align="center" size="small" style={{padding:'0px'}}>
-                {isPendingTab && <PendingActionButtons  task={tasks[value]} />}
-                {!isPendingTab && <ActionButtons isCompletedTab={isCompletedTab} patientName={tasks[value].patient}/>}
+              <TableCell align="center" size="small" style={{ padding: '0px' }}>
+                {isPendingTab && <PendingActionButtons task={tasks[value]} />}
+                {!isPendingTab && <ActionButtons isCompletedTab={isCompletedTab} patientName={tasks[value].patient} />}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       {uploadScanModal && <Modal content={content} actions={modalActions} />}
+      {scanResultModal && <Modal
+        content={<ScanResult image={scanImageURL} />}
+        color="#3781F5"
+        headerColor="white"
+        actions={scanModalActions}
+        description={"Scan Result"}
+        handleOnCloseClick={() => setScanResultModal(!scanResultModal)}
+      />}
       {showMoreInfoModal && (
-        <Modal 
-          color="#3781F5" 
-          headerColor="white" 
+        <Modal
+          color="#3781F5"
+          headerColor="white"
           content={<AppointmentInfo doctorName={showMoreInfoPatientName} />}
           handleOnCloseClick={handleOnCloseClick}
-          />
+        />
       )}
     </>
   );
