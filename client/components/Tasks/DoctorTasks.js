@@ -28,11 +28,10 @@ export default function DoctorTasks(props) {
   const [scanImageURL, setScanImageURL] = useState('https://i0.wp.com/www.aliem.com/wp-content/uploads/2020/04/LobarPNA.png?fit=559%2C425&ssl=1')
   const useStyles = makeStyles(styles);
   const classes = useStyles();
-  const { tasks, rtlActive, isPendingTab, isCompletedTab, handleBookingConfirmation, handleUpdatePatientScan } = props;
+  const { tasks, rtlActive, isPendingTab, isCompletedTab, handleBookingConfirmation, handleUpdatePatientScan, isSpecialist } = props;
   const tableCellClasses = classnames(classes.tableCell, {
     [classes.tableCellRTL]: rtlActive,
   });
-
   const UPLOAD_SCAN_ENDPOINT = '/api/doctors/upload-scan';
 
   const uploadImage = () => {
@@ -74,7 +73,6 @@ export default function DoctorTasks(props) {
   }
 
   const UploadScanButton = (props) => {
-    const { index } = props
     return <Button color="info" onClick={() => setUploadScanModal(true)}>Upload Scan</Button>
   }
 
@@ -193,7 +191,7 @@ export default function DoctorTasks(props) {
         <Modal
           color="#3781F5"
           headerColor="white"
-          content={<AppointmentInfo doctorName={showMoreInfoPatientName} />}
+          content={<AppointmentInfo doctorName={showMoreInfoPatientName} isSpecialist={isSpecialist}/>}
           handleOnCloseClick={handleOnCloseClick}
         />
       )}

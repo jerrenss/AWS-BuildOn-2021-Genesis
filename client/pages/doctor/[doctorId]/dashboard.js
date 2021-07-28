@@ -13,18 +13,11 @@ import { DOCTOR_ONGOING, DOCTOR_PENDING, DOCTOR_COMPLETED, SPECIALIST_ONGOING, S
 function Dashboard() {
     const router = useRouter()
     const { doctorId } = router.query;
-    const [ongoingTasks, setOngoingTasks] = useState(DOCTOR_ONGOING);
-    const [pendingTasks, setPendingTasks] = useState(DOCTOR_PENDING);
+    let ONGOING_TASKS = doctorId === 'doctor' ? DOCTOR_ONGOING : SPECIALIST_ONGOING;
+    let PENDING_TASKS = doctorId === 'doctor' ? DOCTOR_PENDING : SPECIALIST_PENDING;
+    const [ongoingTasks, setOngoingTasks] = useState(ONGOING_TASKS);
+    const [pendingTasks, setPendingTasks] = useState(PENDING_TASKS);
     const [completedTasks, setCompletedTasks] = useState(DOCTOR_COMPLETED);
-
-    useEffect(() => {
-        if(router.isReady){
-            let ONGOING_TASKS = doctorId === 'doctor' ? DOCTOR_ONGOING : SPECIALIST_ONGOING;
-            let PENDING_TASKS = doctorId === 'doctor' ? DOCTOR_PENDING : SPECIALIST_PENDING;
-            setOngoingTasks(ONGOING_TASKS);
-            setPendingTasks(PENDING_TASKS);
-        }
-    })
 
     const handleConfirmationOfBooking = (newOngoingTask) => {
         setOngoingTasks([...ongoingTasks, newOngoingTask]);
@@ -55,19 +48,19 @@ function Dashboard() {
                                 tabName: 'Ongoing',
                                 tabValue: 0,
                                 numOfTasks: ongoingTasks.length,
-                                tabContent: <DoctorTasks tasks={ongoingTasks} handleUpdatePatientScan={handleUpdatePatientScan} />,
+                                tabContent: <DoctorTasks tasks={ongoingTasks} handleUpdatePatientScan={handleUpdatePatientScan} isSpecialist={doctorId === 'specialist'}/>,
                             },
                             {
                                 tabName: 'Pending',
                                 tabValue: 1,
                                 numOfTasks: pendingTasks.length,
-                                tabContent: <DoctorTasks tasks={pendingTasks} isPendingTab={true} handleBookingConfirmation={handleConfirmationOfBooking} />,
+                                tabContent: <DoctorTasks tasks={pendingTasks} isPendingTab={true} handleBookingConfirmation={handleConfirmationOfBooking} isSpecialist={doctorId === 'specialist'} />,
                             },
                             {
                                 tabName: 'Completed',
                                 tabValue: 2,
                                 numOfTasks: completedTasks.length,
-                                tabContent: <DoctorTasks tasks={completedTasks} isCompletedTab={true} />,
+                                tabContent: <DoctorTasks tasks={completedTasks} isCompletedTab={true} isSpecialist={doctorId === 'specialist'} />,
                             },
                         ]}
                     />
