@@ -21,7 +21,7 @@ export class StatusUtil {
                 status = 'Lab Scans Uploaded and Awaiting Specialist Follow-Up Consultation'
                 break;
             case 7:
-                status = 'Status 7'
+                status = 'Awaiting Follow-Up Virtual Consultation'
                 break;
             case 8:
                 status = 'Status 8'

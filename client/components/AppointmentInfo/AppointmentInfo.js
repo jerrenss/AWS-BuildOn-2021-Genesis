@@ -325,7 +325,7 @@ export default function AppointmentInfo(props) {
                 <TimelineContent>
                     <Paper elevation={3} className={classes.paper}>
                         <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
-                            Follow Up Specialist Virtual Consultation
+                            End of Consultation
                         </Typography>
                         <Typography variant="body1">Follow Up Virtual Consultation with Dr Hermoine Granger has successfully completed</Typography>
                         <FileImages isRight={true}/>
