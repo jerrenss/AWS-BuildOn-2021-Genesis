@@ -256,7 +256,7 @@ export default function AppointmentInfo(props) {
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Typography variant="body2" color="textSecondary">
-                        3rd August 2021, 3.00pm
+                        1st August 2021, 3.00pm
                     </Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -314,7 +314,7 @@ export default function AppointmentInfo(props) {
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Typography variant="body2" color="textSecondary">
-                        29th July 2021, 4.00pm
+                        2nd August 2021, 4.00pm
                     </Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -325,7 +325,7 @@ export default function AppointmentInfo(props) {
                 <TimelineContent>
                     <Paper elevation={3} className={classes.paper}>
                         <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
-                            Virtual Consultation
+                            Follow Up Specialist Virtual Consultation
                         </Typography>
                         <Typography variant="body1">Follow Up Virtual Consultation with Dr Hermoine Granger has successfully completed</Typography>
                         <FileImages isRight={true}/>
