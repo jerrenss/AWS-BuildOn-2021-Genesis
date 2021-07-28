@@ -26,7 +26,7 @@ import { MAIN_CHARACTER_SPECIALIST, MAIN_CHARACTER_DOCTOR } from '../../variable
 export default function AppointmentInfo(props) {
     const router = useRouter();
     const { isSpecialist, onEndSessionClick } = props
-    const [paperValue, setPaperValue] = useState(isSpecialist ? 5 : 2);
+    const [paperValue, setPaperValue] = useState(isSpecialist ? 4 : 2);
     const [booking, setBooking] = useState({});
     const [showBookingModal, setShowBookingModal] = useState(false);
     const useStyles = makeStyles((theme) => ({

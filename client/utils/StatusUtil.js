@@ -21,13 +21,13 @@ export class StatusUtil {
                 status = 'Lab Scans Uploaded and Awaiting Specialist Follow-Up Consultation'
                 break;
             case 7:
-                status = 'Consultation Completed and Medication Prescribed'
-                break;
-            case 8:
                 status = 'Status 7'
                 break;
-            case 9:
+            case 8:
                 status = 'Status 8'
+                break;
+            case 9:
+                status = 'Consultation Completed and Medication Prescribed'
                 break;
         }
         return status;
