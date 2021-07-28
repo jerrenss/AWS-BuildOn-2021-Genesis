@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
 // layout for this page
 import Doctor from 'layouts/Doctor.js';
 // core components
@@ -7,12 +8,23 @@ import GridContainer from 'components/Grid/GridContainer.js';
 import DoctorTasks from 'components/Tasks/DoctorTasks.js';
 import CustomTabs from 'components/CustomTabs/CustomTabs.js';
 
-import { DOCTOR_ONGOING, DOCTOR_PENDING, DOCTOR_COMPLETED } from 'variables/general.js';
+import { DOCTOR_ONGOING, DOCTOR_PENDING, DOCTOR_COMPLETED, SPECIALIST_ONGOING, SPECIALIST_PENDING } from 'variables/general.js';
 
 function Dashboard() {
+    const router = useRouter()
+    const { doctorId } = router.query;
     const [ongoingTasks, setOngoingTasks] = useState(DOCTOR_ONGOING);
     const [pendingTasks, setPendingTasks] = useState(DOCTOR_PENDING);
     const [completedTasks, setCompletedTasks] = useState(DOCTOR_COMPLETED);
+
+    useEffect(() => {
+        if(router.isReady){
+            let ONGOING_TASKS = doctorId === 'doctor' ? DOCTOR_ONGOING : SPECIALIST_ONGOING;
+            let PENDING_TASKS = doctorId === 'doctor' ? DOCTOR_PENDING : SPECIALIST_PENDING;
+            setOngoingTasks(ONGOING_TASKS);
+            setPendingTasks(PENDING_TASKS);
+        }
+    })
 
     const handleConfirmationOfBooking = (newOngoingTask) => {
         setOngoingTasks([...ongoingTasks, newOngoingTask]);

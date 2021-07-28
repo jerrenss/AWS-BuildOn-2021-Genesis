@@ -112,7 +112,51 @@ const doctorRoutes = [
   },
 ];
 
+const specialistRoutes = [
+  {
+    path: '/dashboard',
+    name: 'Home',
+    rtlName: 'لوحة القيادة',
+    icon: HomeIcon,
+
+    layout: '/specialist',
+  },
+  {
+    path: '',
+    name: 'Lab Reports',
+    rtlName: 'طباعة',
+    icon: LibraryBooks,
+
+    layout: '#',
+  },
+  {
+    path: '',
+    name: 'Profile',
+    rtlName: 'الرموز',
+    icon: AccountCircleIcon,
+
+    layout: '#',
+  },
+  {
+    path: '',
+    name: 'Settings',
+    rtlName: 'خرائط',
+    icon: SettingsIcon,
+
+    layout: '#',
+  },
+  {
+    path: '',
+    name: 'Log out',
+    rtlName: 'إخطارات',
+    icon: ExitToAppIcon,
+
+    layout: '#',
+  },
+];
+
 module.exports = {
   patientRoutes,
   doctorRoutes,
+  specialistRoutes,
 };

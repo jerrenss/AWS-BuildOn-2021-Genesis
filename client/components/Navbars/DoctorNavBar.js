@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
@@ -8,11 +8,13 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import styles from 'assets/jss/nextjs-material-dashboard/components/headerStyle.js';
-import { MAIN_CHARACTER_DOCTOR } from 'variables/general';
+import { MAIN_CHARACTER_DOCTOR, MAIN_CHARACTER_SPECIALIST } from 'variables/general';
 
 export default function Header(props) {
     // used for checking current route
     const router = useRouter();
+    const { doctorId } = router.query;
+    const [doctor, setDoctor] = useState('');
     // create styles for this component
     const useStyles = makeStyles(styles);
     const classes = useStyles();
@@ -20,6 +22,14 @@ export default function Header(props) {
     const appBarClasses = classNames({
         [' ' + classes[color]]: color,
     });
+
+    useEffect(() => {
+        if(router.isReady){
+            let doctorName = doctorId === 'doctor' ? MAIN_CHARACTER_DOCTOR : MAIN_CHARACTER_SPECIALIST;
+            setDoctor(doctorName);
+        }
+    })
+
     return (
         <AppBar className={classes.appBar + appBarClasses}>
             <Toolbar className={classes.container}>
@@ -28,7 +38,7 @@ export default function Header(props) {
                         <span style={{ fontSize: '34px', color: 'black' }}>
                             Greetings&nbsp;
                         </span>
-                        <span style={{ fontSize: '34px', color: '#3781F5' }}>{`Dr ${MAIN_CHARACTER_DOCTOR}`}</span>
+                        <span style={{ fontSize: '34px', color: '#3781F5' }}>{`Dr ${doctor}`}</span>
                         <span style={{ fontSize: '34px', color: 'black' }}>,</span>
                     </div>
                     <div
