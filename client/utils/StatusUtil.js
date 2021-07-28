@@ -24,9 +24,6 @@ export class StatusUtil {
                 status = 'Awaiting Follow-Up Virtual Consultation'
                 break;
             case 8:
-                status = 'Status 8'
-                break;
-            case 9:
                 status = 'Consultation Completed and Medication Prescribed'
                 break;
         }
