@@ -4,7 +4,7 @@
 
 const MAIN_CHARACTER_PATIENT = "Harry Potter"
 const MAIN_CHARACTER_DOCTOR = "Ron Weasly"
-const MAIN_CHARACTER_SPECIALIST = "Hermione Granger"
+const MAIN_CHARACTER_SPECIALIST = "Hermoine Granger"
 
 var bugs = [{ patientId: 1, doctor: MAIN_CHARACTER_DOCTOR, image: true, date: '20/07/2021' }];
 var doctors = [
@@ -75,12 +75,23 @@ const DOCTOR_ONGOING = [
   { patientId: 3, patient: 'Dobby', image: true, date: '03/08/2021' },
 ];
 const DOCTOR_PENDING = [
-  { patientId: 4, patient: MAIN_CHARACTER_PATIENT, date: '05/08/2021', symptoms: 'Cough, Fever, Sore Throat' },
+  { patientId: 4, patient: MAIN_CHARACTER_PATIENT, date: '04/08/2021', symptoms: 'Cough, Fever, Sore Throat' },
 ];
 const DOCTOR_COMPLETED = [
   { patientId: 5, patient: 'Narcissa Malfoy', image: true, date: '10/07/2021' },
   { patientId: 6, patient: 'Hedwig', image: true, date: '10/07/2021' },
 ];
+
+const SPECIALIST_ONGOING = [
+  { patientId: 7, patient: 'Ginnie Weasely', image: true, date: '31/07/2021' },
+  { patientId: 8, patient: 'Narcissa Malfoy', image: false, date: '01/08/2021' },
+  { patientId: 9, patient: 'Dobby', image: false, date: '03/08/2021' },
+];
+
+const SPECIALIST_PENDING = [
+  { patientId: 4, patient: MAIN_CHARACTER_PATIENT, date: '06/08/2021', symptoms: 'Cough, Fever, Sore Throat' }
+]
+
 var AVAILABLE_TIMINGS = [
   {
     date: '21/07/2021',
@@ -150,6 +161,8 @@ module.exports = {
   DOCTOR_ONGOING,
   DOCTOR_PENDING,
   DOCTOR_COMPLETED,
+  SPECIALIST_ONGOING,
+  SPECIALIST_PENDING,
   bugs,
   website,
   server,
