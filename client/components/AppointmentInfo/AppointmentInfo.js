@@ -23,8 +23,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import { MAIN_CHARACTER_SPECIALIST } from '../../variables/general'
 
 export default function AppointmentInfo(props) {
-    const { isSpecialist } = props
-    console.log(isSpecialist);
+    const { isSpecialist, onEndSessionClick } = props
     const [paperValue, setPaperValue] = useState(isSpecialist ? 5 : 2);
     const [booking, setBooking] = useState({});
     const [showBookingModal, setShowBookingModal] = useState(false);
@@ -71,18 +70,20 @@ export default function AppointmentInfo(props) {
         </>
     );
 
-    const FurtherActionsButton = () => {
+    const FurtherActionsButton = (props) => {
+        const { isLastCard}  = props;
         return (
             <div>
-                <Button size="small" color="warning">End Session</Button>
-                <Button size="small" color="info" onClick={() => setShowBookingModal(true)}>Refer to Specialist</Button>
+                <Button size="small" color="warning" onClick={onEndSessionClick}>End Session</Button>
+                {!isLastCard && <Button size="small" color="info" onClick={() => setShowBookingModal(true)}>Refer to Specialist</Button>}
             </div>
         );
     }
 
-    const FileImages = () => {
+    const FileImages = (props) => {
+        const { isRight } = props;
         return (
-            <div style={{display: 'flex', flexDirection:'row', marginTop:'10px', marginBottom:'10px'}}>
+            <div style={{display: 'flex', flexDirection:'row', marginTop:'10px', marginBottom:'10px', justifyContent: isRight ? 'flex-end' : 'flex-start'}}>
                 <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', marginRight: '10px'}}>
                     <DescriptionIcon />
                     <span>Prescription</span>
@@ -95,9 +96,10 @@ export default function AppointmentInfo(props) {
         )
     }
 
-    const LabScans = () => {
+    const LabScans = (props) => {
+        const { isLeft } = props;
         return (
-            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: '10px'}}>
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: isLeft ? 'flex-end' : 'flex-start', marginTop: '10px'}}>
                 <DescriptionIcon />
                 <span>Lab Scan</span>
             </div>
@@ -109,7 +111,7 @@ export default function AppointmentInfo(props) {
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Typography variant="body2" color="textSecondary">
-                        20th July 2021, 11.00am
+                        28th July 2021, 11.00am
                     </Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -122,7 +124,7 @@ export default function AppointmentInfo(props) {
                         <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
                             Virtual Consultation Booking
                         </Typography>
-                        <Typography variant="body2">Booking has been made for 22nd July 2021 at 3.00PM</Typography>
+                        <Typography variant="body1">Booking has been made for 29th July 2021 at 3.00PM</Typography>
                     </Paper>
                 </TimelineContent>
             </TimelineItem>
@@ -135,7 +137,7 @@ export default function AppointmentInfo(props) {
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Typography variant="body2" color="textSecondary">
-                        20th July 2021, 11.00am
+                        28th July 2021, 1.00pm
                     </Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -148,7 +150,7 @@ export default function AppointmentInfo(props) {
                         <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
                             Virtual Consultation Booking
                         </Typography>
-                        <Typography variant="body2">
+                        <Typography variant="body1">
                             Booking has been successfully confirmed by Dr Ron Weasley, please click&nbsp;
                             <Link href="/conferencing/randomFixedString" style={{ color: 'blue' }}>here </Link>
                             for video consultation link
@@ -165,7 +167,7 @@ export default function AppointmentInfo(props) {
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Typography variant="body2" color="textSecondary">
-                        22nd July 2021, 3.00pm
+                        29th July 2021, 4.00pm
                     </Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -178,7 +180,7 @@ export default function AppointmentInfo(props) {
                         <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
                             Virtual Consultation
                         </Typography>
-                        <Typography variant="body2">Virtual Consultation with Dr Ron Weasley has successfully completed</Typography>
+                        <Typography variant="body1">Virtual Consultation with Dr Ron Weasley has successfully completed</Typography>
                         <FileImages />
                         <FurtherActionsButton />
                     </Paper>
@@ -193,7 +195,7 @@ export default function AppointmentInfo(props) {
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Typography variant="body2" color="textSecondary">
-                        22nd July 2021, 5.30pm
+                        29nd July 2021, 5.30pm
                     </Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -206,7 +208,7 @@ export default function AppointmentInfo(props) {
                         <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
                             Specialist Referral
                         </Typography>
-                        <Typography variant="body2">Dr Hermoine has successfully confirmed the referral made by Dr Ron Weasley and scheduled a initial virtual consultation on 23rd July 2021 at 2.30pm</Typography>
+                        <Typography variant="body1">Dr Hermoine has successfully confirmed the referral made by Dr Ron Weasley and scheduled a initial virtual consultation on 30th July 2021 at 3.00pm</Typography>
                     </Paper>
                 </TimelineContent>
             </TimelineItem>
@@ -215,12 +217,11 @@ export default function AppointmentInfo(props) {
 
     const FifthCard = (props) => {
         const { isCurrent, currpaperValue } = props;
-        console.log(props)
         return (
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Typography variant="body2" color="textSecondary">
-                        23rd July 2021, 2.30pm
+                        30th July 2021, 3.00pm
                     </Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -233,7 +234,7 @@ export default function AppointmentInfo(props) {
                         <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
                             Initial Specialist Virtual Consultation
                         </Typography>
-                        <Typography variant="body2">
+                        <Typography variant="body1">
                             Booking has been successfully confirmed by Dr Hermoine, please click&nbsp;
                             <Link href="/conferencing/randomFixedString" style={{ color: 'blue' }}>here </Link>
                             for video consultation link
@@ -251,7 +252,35 @@ export default function AppointmentInfo(props) {
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Typography variant="body2" color="textSecondary">
-                        25th July 2021, 3.30pm
+                        3rd August 2021, 3.00pm
+                    </Typography>
+                </TimelineOppositeContent>
+                <TimelineSeparator>
+                    <TimelineDot color={isCurrent ? `secondary` : `grey`}>
+                    </TimelineDot>
+                    {!isCurrent && <TimelineConnector className={currpaperValue - 1 === 6 ? classes.secondaryTail : null} />}
+                </TimelineSeparator>
+                <TimelineContent>
+                    <Paper elevation={3} className={classes.paper}>
+                        <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
+                            Lab Scans
+                        </Typography>
+                        <Typography variant="body1">Lab Scans Have Been Uploaded and Results Are Back</Typography>
+                        <LabScans isLeft={true}/>
+                    </Paper>
+                </TimelineContent>
+            </TimelineItem>
+        )
+    }
+
+    const SeventhCard = (props) => {
+        const { isCurrent, currpaperValue } = props;
+        console.log(props)
+        return (
+            <TimelineItem>
+                <TimelineOppositeContent>
+                    <Typography variant="body2" color="textSecondary">
+                        2nd August 2021, 3.00pm
                     </Typography>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -262,10 +291,41 @@ export default function AppointmentInfo(props) {
                 <TimelineContent>
                     <Paper elevation={3} className={classes.paper}>
                         <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
-                            Lab Scans
+                            Follow-Up Specialist Virtual Consultation
                         </Typography>
-                        <Typography variant="body2">Lab Scans Have Been Uploaded and Results Are Back</Typography>
-                        <LabScans />
+                        <Typography variant="body1">
+                            Booking has been successfully confirmed by Dr Hermoine, please click&nbsp;
+                            <Link href="/conferencing/randomFixedString" style={{ color: 'blue' }}>here </Link>
+                            for video consultation link
+                        </Typography>
+                    </Paper>
+                </TimelineContent>
+            </TimelineItem>
+        )
+    }
+
+    const EightCard = (props) => {
+        const { isCurrent, currpaperValue } = props;
+        return (
+            <TimelineItem>
+                <TimelineOppositeContent>
+                    <Typography variant="body2" color="textSecondary">
+                        29th July 2021, 4.00pm
+                    </Typography>
+                </TimelineOppositeContent>
+                <TimelineSeparator>
+                    <TimelineDot color={isCurrent ? `secondary` : `grey`}>
+                    </TimelineDot>
+                    {!isCurrent && <TimelineConnector className={currpaperValue - 1 === 3 ? classes.secondaryTail : null} />}
+                </TimelineSeparator>
+                <TimelineContent>
+                    <Paper elevation={3} className={classes.paper}>
+                        <Typography variant="h6" component="h1" style={{ color: '#3781F5' }}>
+                            Virtual Consultation
+                        </Typography>
+                        <Typography variant="body1">Follow Up Virtual Consultation with Dr Hermoine Granger has successfully completed</Typography>
+                        <FileImages isRight={true}/>
+                        <FurtherActionsButton isLastCard={true} />
                     </Paper>
                 </TimelineContent>
             </TimelineItem>
@@ -278,6 +338,8 @@ export default function AppointmentInfo(props) {
     const isFourthCardPresent = paperValue >= 4;
     const isFifthCardPresent = paperValue >= 5;
     const isSixthCardPresent = paperValue >= 6;
+    const isSeventhCardPresent = paperValue >= 7;
+    const isEightCardPresent = paperValue >= 8;
 
     return (
         <>
@@ -317,6 +379,8 @@ export default function AppointmentInfo(props) {
                         {isFourthCardPresent && <FourthCard isCurrent={paperValue === 4} currpaperValue={paperValue} />}
                         {isFifthCardPresent && <FifthCard isCurrent={paperValue === 5} currpaperValue={paperValue} />}
                         {isSixthCardPresent && <SixthCard isCurrent={paperValue === 6} currpaperValue={paperValue} />}
+                        {isSeventhCardPresent && <SeventhCard isCurrent={paperValue === 7} currpaperValue={paperValue} />}
+                        {isEightCardPresent && <EightCard isCurrent={paperValue === 8} currpaperValue={paperValue} />}
                     </Timeline>
                 </GridItem>
             </GridContainer>

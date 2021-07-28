@@ -135,6 +135,10 @@ export default function DoctorTasks(props) {
     )
   }
 
+  const handleSessionEndClick = () => {
+    setShowMoreInfoModal(false);
+  }
+
   return (
     <>
       <Table className={classes.table}>
@@ -191,7 +195,7 @@ export default function DoctorTasks(props) {
         <Modal
           color="#3781F5"
           headerColor="white"
-          content={<AppointmentInfo doctorName={showMoreInfoPatientName} isSpecialist={isSpecialist}/>}
+          content={<AppointmentInfo doctorName={showMoreInfoPatientName} isSpecialist={isSpecialist} onEndSessionClick={handleSessionEndClick}/>}
           handleOnCloseClick={handleOnCloseClick}
         />
       )}
