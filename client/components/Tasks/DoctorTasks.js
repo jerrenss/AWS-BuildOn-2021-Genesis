@@ -170,15 +170,25 @@ export default function DoctorTasks(props) {
           ))}
         </TableBody>
       </Table>
-      {uploadScanModal && <Modal content={content} actions={modalActions} />}
-      {scanResultModal && <Modal
-        content={<ScanResult image={scanImageURL} />}
-        color="#3781F5"
-        headerColor="white"
-        actions={scanModalActions}
-        description={"Scan Result"}
-        handleOnCloseClick={() => setScanResultModal(!scanResultModal)}
-      />}
+      {
+        uploadScanModal && 
+          <Modal 
+            content={content} 
+            actions={modalActions} 
+            handleOnCloseClick={() => setUploadScanModal(false)}
+          />
+      }
+      {
+        scanResultModal && 
+          <Modal
+            content={<ScanResult image={scanImageURL} />}
+            color="#3781F5"
+            headerColor="white"
+            actions={scanModalActions}
+            description={"Scan Result"}
+            handleOnCloseClick={() => setScanResultModal(!scanResultModal)}
+          />
+      }
       {showMoreInfoModal && (
         <Modal
           color="#3781F5"
