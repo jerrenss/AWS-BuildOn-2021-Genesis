@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef } from 'react';
+import NextLink from "next/link"
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
 import Button from '../../components/CustomButtons/Button'
+import Modal from '../../components/Modal/Modal'
+import BookingFrom from '../../components/BookingForm/BookingForm'
 import { StatusUtil } from '../../utils/StatusUtil';
+import { useAppContext } from '../../context/state';
 //Material-UI components
 import { makeStyles } from '@material-ui/core/styles';
 import Timeline from '@material-ui/lab/Timeline';
@@ -16,10 +20,13 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import DescriptionIcon from '@material-ui/icons/Description';
+import { MAIN_CHARACTER_SPECIALIST } from '../../variables/general'
 
 export default function AppointmentInfo(props) {
-    const { doctorName } = props;
-    const [value, setValue] = useState(2);
+    const { isSpecialist } = props
+    console.log(isSpecialist);
+    const [paperValue, setPaperValue] = useState(isSpecialist ? 5 : 2);
+    const [booking, setBooking] = useState({});
     const [showBookingModal, setShowBookingModal] = useState(false);
     const useStyles = makeStyles((theme) => ({
         paper: {
@@ -30,13 +37,45 @@ export default function AppointmentInfo(props) {
         },
     }));
     const classes = useStyles();
-    const STATUS = StatusUtil.getStatusType(value);
+    const STATUS = StatusUtil.getStatusType(paperValue);
+    const value = useAppContext();
+
+    const handleOnFormChange = (booking) => {
+        setBooking(booking);
+    }
+
+    const handleOnCloseBookingClick = () => {
+        setShowBookingModal(false);
+    }
+
+    const handleBookingSubmit = () => {
+        value.setNewBooking(booking);
+    }
+
+    const SubmitButton = forwardRef(({ onClick, href }, ref) => {
+        return (
+          <Button color="info" onClick={onClick} ref={ref} href={href}>
+            Submit
+          </Button>
+        )
+    })
+
+    const bookingModalButtons = (
+        <>
+          <Button color="warning" onClick={() => setShowBookingModal(false)}>
+            Back
+          </Button>
+          <NextLink href="/doctor/doctor/dashboard" passHref>
+            <SubmitButton onClick={handleBookingSubmit} />
+          </NextLink>
+        </>
+    );
 
     const FurtherActionsButton = () => {
         return (
             <div>
                 <Button size="small" color="warning">End Session</Button>
-                <Button size="small" color="info" onClick={() => setShowBookingModal(false)}>Refer to Specialist</Button>
+                <Button size="small" color="info" onClick={() => setShowBookingModal(true)}>Refer to Specialist</Button>
             </div>
         );
     }
@@ -66,7 +105,6 @@ export default function AppointmentInfo(props) {
     }
 
     const FirstCard = (props) => {
-        const { isCurrent } = props;
         return (
             <TimelineItem>
                 <TimelineOppositeContent>
@@ -92,7 +130,7 @@ export default function AppointmentInfo(props) {
     }
 
     const SecondCard = (props) => {
-        const { isCurrent, currValue } = props;
+        const { isCurrent, currpaperValue } = props;
         return (
             <TimelineItem>
                 <TimelineOppositeContent>
@@ -103,7 +141,7 @@ export default function AppointmentInfo(props) {
                 <TimelineSeparator>
                     <TimelineDot color={isCurrent ? `secondary` : `grey`}>
                     </TimelineDot>
-                    {!isCurrent && <TimelineConnector className={currValue - 1 === 2 ? classes.secondaryTail : null}/>}
+                    {!isCurrent && <TimelineConnector className={currpaperValue - 1 === 2 ? classes.secondaryTail : null}/>}
                 </TimelineSeparator>
                 <TimelineContent>
                     <Paper elevation={3} className={classes.paper}>
@@ -122,7 +160,7 @@ export default function AppointmentInfo(props) {
     }
 
     const ThirdCard = (props) => {
-        const { isCurrent, currValue } = props;
+        const { isCurrent, currpaperValue } = props;
         return (
             <TimelineItem>
                 <TimelineOppositeContent>
@@ -133,7 +171,7 @@ export default function AppointmentInfo(props) {
                 <TimelineSeparator>
                     <TimelineDot color={isCurrent ? `secondary` : `grey`}>
                     </TimelineDot>
-                    {!isCurrent && <TimelineConnector className={currValue - 1 === 3 ? classes.secondaryTail : null} />}
+                    {!isCurrent && <TimelineConnector className={currpaperValue - 1 === 3 ? classes.secondaryTail : null} />}
                 </TimelineSeparator>
                 <TimelineContent>
                     <Paper elevation={3} className={classes.paper}>
@@ -150,7 +188,7 @@ export default function AppointmentInfo(props) {
     }
 
     const FourthCard = (props) => {
-        const { isCurrent, currValue } = props;
+        const { isCurrent, currpaperValue } = props;
         return (
             <TimelineItem>
                 <TimelineOppositeContent>
@@ -161,7 +199,7 @@ export default function AppointmentInfo(props) {
                 <TimelineSeparator>
                     <TimelineDot color={isCurrent ? `secondary` : `grey`}>
                     </TimelineDot>
-                    {!isCurrent && <TimelineConnector className={currValue - 1 === 4 ? classes.secondaryTail : null} />}
+                    {!isCurrent && <TimelineConnector className={currpaperValue - 1 === 4 ? classes.secondaryTail : null} />}
                 </TimelineSeparator>
                 <TimelineContent>
                     <Paper elevation={3} className={classes.paper}>
@@ -176,7 +214,7 @@ export default function AppointmentInfo(props) {
     }
 
     const FifthCard = (props) => {
-        const { isCurrent, currValue } = props;
+        const { isCurrent, currpaperValue } = props;
         console.log(props)
         return (
             <TimelineItem>
@@ -188,7 +226,7 @@ export default function AppointmentInfo(props) {
                 <TimelineSeparator>
                     <TimelineDot color={isCurrent ? `secondary` : `grey`}>
                     </TimelineDot>
-                    {!isCurrent && <TimelineConnector className={currValue - 1 === 5 ? classes.secondaryTail : null} />}
+                    {!isCurrent && <TimelineConnector className={currpaperValue - 1 === 5 ? classes.secondaryTail : null} />}
                 </TimelineSeparator>
                 <TimelineContent>
                     <Paper elevation={3} className={classes.paper}>
@@ -207,7 +245,7 @@ export default function AppointmentInfo(props) {
     }
 
     const SixthCard = (props) => {
-        const { isCurrent, currValue } = props;
+        const { isCurrent, currpaperValue } = props;
         console.log(props)
         return (
             <TimelineItem>
@@ -219,7 +257,7 @@ export default function AppointmentInfo(props) {
                 <TimelineSeparator>
                     <TimelineDot color={isCurrent ? `secondary` : `grey`}>
                     </TimelineDot>
-                    {!isCurrent && <TimelineConnector className={currValue - 1 === 5 ? classes.secondaryTail : null} />}
+                    {!isCurrent && <TimelineConnector className={currpaperValue - 1 === 5 ? classes.secondaryTail : null} />}
                 </TimelineSeparator>
                 <TimelineContent>
                     <Paper elevation={3} className={classes.paper}>
@@ -234,12 +272,12 @@ export default function AppointmentInfo(props) {
         )
     }
 
-    const isFirstCardPresent = value >= 1;
-    const isSecondCardPresent = value >= 2;
-    const isThirdCardPresent = value >= 3;
-    const isFourthCardPresent = value >= 4;
-    const isFifthCardPresent = value >= 5;
-    const isSixthCardPresent = value >= 6;
+    const isFirstCardPresent = paperValue >= 1;
+    const isSecondCardPresent = paperValue >= 2;
+    const isThirdCardPresent = paperValue >= 3;
+    const isFourthCardPresent = paperValue >= 4;
+    const isFifthCardPresent = paperValue >= 5;
+    const isSixthCardPresent = paperValue >= 6;
 
     return (
         <>
@@ -270,19 +308,28 @@ export default function AppointmentInfo(props) {
                     </span>
                 </GridItem>
             </GridContainer>
-            <GridContainer style={{maxHeight: '40vh', overflow: 'auto'}} onClick={() => setValue(value + 1)}>
+            <GridContainer style={{maxHeight: '40vh', overflow: 'auto'}} onClick={() => setPaperValue(paperValue + 1)}>
                 <GridItem xs={12} sm={12} md={12}>
                     <Timeline align="alternate">
-                        {isFirstCardPresent && <FirstCard isCurrent={value === 1} currValue={value} />}
-                        {isSecondCardPresent && <SecondCard isCurrent={value === 2} currValue={value} />}
-                        {isThirdCardPresent && <ThirdCard isCurrent={value === 3} currValue={value} />}
-                        {isFourthCardPresent && <FourthCard isCurrent={value === 4} currValue={value} />}
-                        {isFifthCardPresent && <FifthCard isCurrent={value === 5} currValue={value} />}
-                        {isSixthCardPresent && <SixthCard isCurrent={value === 6} currValue={value} />}
+                        {isFirstCardPresent && <FirstCard isCurrent={paperValue === 1} currpaperValue={paperValue} />}
+                        {isSecondCardPresent && <SecondCard isCurrent={paperValue === 2} currpaperValue={paperValue} />}
+                        {isThirdCardPresent && <ThirdCard isCurrent={paperValue === 3} currpaperValue={paperValue} />}
+                        {isFourthCardPresent && <FourthCard isCurrent={paperValue === 4} currpaperValue={paperValue} />}
+                        {isFifthCardPresent && <FifthCard isCurrent={paperValue === 5} currpaperValue={paperValue} />}
+                        {isSixthCardPresent && <SixthCard isCurrent={paperValue === 6} currpaperValue={paperValue} />}
                     </Timeline>
                 </GridItem>
             </GridContainer>
-            {showBookingModal && <Modal isSecondModal={true}/>}
+            {showBookingModal && 
+                <Modal 
+                    content={<BookingFrom selectedDoctor={MAIN_CHARACTER_SPECIALIST} onFormChange={handleOnFormChange} />}
+                    actions={bookingModalButtons}
+                    color="#3781F5"
+                    headerColor="white"
+                    style={{ height: '300px', width: '200px' }}
+                    handleOnCloseClick={handleOnCloseBookingClick}
+                />
+            }
         </>
     )
 }
