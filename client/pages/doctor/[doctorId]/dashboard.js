@@ -11,7 +11,7 @@ import CustomTabs from 'components/CustomTabs/CustomTabs.js';
 import { DOCTOR_ONGOING, DOCTOR_PENDING, DOCTOR_COMPLETED, SPECIALIST_ONGOING, SPECIALIST_PENDING } from 'variables/general.js';
 
 function Dashboard() {
-    const router = useRouter()
+    const router = useRouter();
     const { doctorId } = router.query;
     let ONGOING_TASKS = doctorId === 'doctor' ? DOCTOR_ONGOING : SPECIALIST_ONGOING;
     let PENDING_TASKS = doctorId === 'doctor' ? DOCTOR_PENDING : SPECIALIST_PENDING;

@@ -1,4 +1,5 @@
 import React, { useState, forwardRef } from 'react';
+import { useRouter } from 'next/router'
 import NextLink from "next/link"
 import GridContainer from '../../components/Grid/GridContainer';
 import GridItem from '../../components/Grid/GridItem';
@@ -20,9 +21,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import DescriptionIcon from '@material-ui/icons/Description';
-import { MAIN_CHARACTER_SPECIALIST } from '../../variables/general'
+import { MAIN_CHARACTER_SPECIALIST, MAIN_CHARACTER_DOCTOR } from '../../variables/general'
 
 export default function AppointmentInfo(props) {
+    const router = useRouter();
     const { isSpecialist, onEndSessionClick } = props
     const [paperValue, setPaperValue] = useState(isSpecialist ? 5 : 2);
     const [booking, setBooking] = useState({});
@@ -38,6 +40,8 @@ export default function AppointmentInfo(props) {
     const classes = useStyles();
     const STATUS = StatusUtil.getStatusType(paperValue);
     const value = useAppContext();
+    const { doctorId } = router.query;
+    let doctorName = doctorId === 'specialist' ? MAIN_CHARACTER_SPECIALIST : MAIN_CHARACTER_DOCTOR;
 
     const handleOnFormChange = (booking) => {
         setBooking(booking);
@@ -349,7 +353,7 @@ export default function AppointmentInfo(props) {
                         Attending Doctor: &nbsp;
                     </span>
                     <span style={{ fontSize: '22px', fontWeight: '500', color: '#3781F5' }}>
-                        Dr Ron Weasley
+                        Dr {doctorName}
                     </span>
                 </GridItem>
             </GridContainer>
