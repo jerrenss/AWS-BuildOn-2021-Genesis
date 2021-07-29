@@ -6,8 +6,7 @@ const backBtn = document.querySelector(".header__back");
 myVideo.muted = true;
 
 backBtn.addEventListener("click", () => {
-  // TODO: Update URL to return to home dashboard
-  window.location.href = "/doctor/dashboard";
+  window.location.href = "/doctor/doctor/dashboard";
 });
 
 showChat.addEventListener("click", () => {

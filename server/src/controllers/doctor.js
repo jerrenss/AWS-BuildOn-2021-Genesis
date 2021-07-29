@@ -4,6 +4,8 @@ const { uploadFile } = require("../utils/aws-s3")
 const moment = require("moment")
 const fetch = require("node-fetch");
 
+const AWS_SCAN_PREDICTION_URL = "https://52pg1li9yh.execute-api.ap-southeast-1.amazonaws.com/test/predicted-covid"
+
 exports.getAllDoctors = async (req, res) => {
     const allDoctors = await pool.query("SELECT * FROM doctors d NATURAL JOIN clinics c INNER JOIN " +
         "(SELECT user_created_at, user_id, user_name, email FROM users) u ON d.doctor_id = u.user_id;").catch(err => {
@@ -27,13 +29,18 @@ exports.uploadScan = async (req, res) => {
             return res.status(400).json({ errMsg: err.message })
         })
 
-    const mockAPIResult = await fetch('https://jsonplaceholder.typicode.com/todos/1')
+    const sagemakerResult = await fetch(AWS_SCAN_PREDICTION_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+            img_url: uploadS3Result.Location
+        }),
+    })
         .then(response => response.json())
         .catch(err => {
             return res.status(400).json({ errMsg: err.message })
         })
 
-    res.status(200).json({ message: "Image uploaded successfully!", location: uploadS3Result.Location, sagemakerRes: mockAPIResult })
+    res.status(200).json({ message: "Image uploaded successfully!", location: uploadS3Result.Location, sagemakerRes: sagemakerResult })
 }
 
 const parseForm = (req) => {
